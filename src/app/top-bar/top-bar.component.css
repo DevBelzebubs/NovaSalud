@@ -82,3 +82,119 @@
     gap: 20px;
     margin-left: 275px;
 }
+.itemContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 45px;
+}
+@media (max-width: 1024px) {
+    .topContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        margin-top: 0;
+    }
+
+    .optionsContainer {
+        flex-direction: column;
+        margin-left: 0;
+        gap: 20px;
+    }
+
+    .optionsRedirect {
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+    .itemContainer {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        text-align: center;
+    }
+    .bottomContainer {
+        margin-top: 0;
+        position: relative;
+    }
+}
+
+@media (max-width: 768px) {
+    .enterUser {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+        margin-right: 20px;
+    }
+
+    .topContainer {
+        gap: 20px;
+        padding: 10px;
+    }
+    .topContainer img[alt="Logo"] {
+        width: 300px;
+    }
+
+    .bottomContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .optionsRedirect {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .optionItem {
+        font-size: 120%;
+    }
+    .itemContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .itemContainer img {
+        width: 24px;
+    }
+
+    .itemContainer span {
+        font-size: 14px;
+    }
+}
+
+/* Móviles (menores o iguales a 480px) */
+@media (max-width: 480px) {
+    .topContainer img[alt="Logo"] {
+        width: 280px;
+    }
+    .numberContainer img,
+    .emailContainer img,
+    .openingHours img {
+        width: 20px;
+    }
+    .phoneNumber,
+    .email,
+    .openingHoursText {
+        font-size: 14px;
+    }
+    .optionItem {
+        font-size: 100%;
+        text-align: center;
+    }
+    .enterUser {
+        align-items: center;
+        margin-right: 0;
+    }
+    .itemContainer {
+        gap: 15px;
+    }
+    .itemContainer img {
+        width: 20px;
+    }
+    .itemContainer span {
+        font-size: 13px;
+    }
+}
