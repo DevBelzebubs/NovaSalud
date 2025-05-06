@@ -1,0 +1,197 @@
+.appContainer{
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 20px;
+    margin-top: -20px;
+    background-color: rgb(240, 240, 240);
+
+}
+.appTitle{
+    font-size: 30px;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}
+.aboutUs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+.aboutusData{
+    display: flex;
+    gap: 300px;
+    justify-content: center;
+}
+.aboutusdataValores ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    margin-left: -15px;
+    gap: 5px;
+}
+.aboutusdataMision img , .aboutusdataVision img , .aboutusdataValores img{
+    margin-left: 25px;
+}
+.aboutusdataValores img{
+    margin-left: 50px;
+}
+.aboutusdataMision h4 , .aboutusdataVision h4, .aboutusdataValores ul{
+    font-size: 20px;
+    color: #9b9b9b;
+    text-align: center;
+    font-weight: 10;
+    width: 200px;
+}
+.aboutusdataMision h2 , .aboutusdataVision h2 , .aboutusdataValores h2{
+    font-size: 30px;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}
+.whyOurs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.whyOursText{
+    font-size: 16px;
+    font-weight: 700;
+    color: #9b9b9b;
+    text-align: center;
+}
+.whyOurs ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    margin-left: -15px;
+    gap: 5px;
+}
+.whyOurs p{
+    font-size: 24px;
+    font-weight: 700;
+    color: #363636;
+    text-align: center;
+    width: 1000px;
+    margin-left: 30px;
+}
+@media (max-width: 1600px) {
+    .aboutusData {
+        gap: 200px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .aboutusData {
+        gap: 150px;
+    }
+    .whyOurs p {
+        width: 800px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .aboutusData {
+        gap: 100px;
+    }
+    .whyOurs p {
+        width: 700px;
+    }
+}
+@media (max-width: 1024px) {
+    .aboutusData {
+        gap: 50px;
+    }
+    .whyOurs p {
+        width: 650px;
+    }
+}
+@media (max-width: 900px) {
+    .aboutusData {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    .aboutusdataMision, 
+    .aboutusdataVision, 
+    .aboutusdataValores {
+        margin-bottom: 30px;
+    }
+    .whyOurs p {
+        width: 600px;
+    }
+}
+
+@media (max-width: 700px) {
+    .appTitle h1 {
+        font-size: 46px;
+    }
+    .whyOurs p {
+        width: 500px;
+        font-size: 20px;
+    }
+    .aboutusdataMision h4, 
+    .aboutusdataVision h4, 
+    .aboutusdataValores ul {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 550px) {
+    .whyOurs p {
+        width: 400px;
+        font-size: 18px;
+    }
+    .aboutusdataMision h2,
+    .aboutusdataVision h2,
+    .aboutusdataValores h2 {
+        font-size: 26px;
+    }
+    .aboutusdataMision img, 
+    .aboutusdataVision img, 
+    .aboutusdataValores img {
+        width: 120px;
+    }
+    .whyOurs img {
+        width: 200px;
+    }
+}
+
+@media (max-width: 450px) {
+    .whyOurs p {
+        width: 350px;
+    }
+    .aboutusdataMision h4, 
+    .aboutusdataVision h4, 
+    .aboutusdataValores ul {
+        width: 180px;
+    }
+    .appTitle h1 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 380px) {
+    .whyOurs p {
+        width: 300px;
+        font-size: 16px;
+    }
+    .aboutusdataMision h2,
+    .aboutusdataVision h2,
+    .aboutusdataValores h2 {
+        font-size: 22px;
+    }
+    .aboutusdataMision img, 
+    .aboutusdataVision img, 
+    .aboutusdataValores img {
+        width: 100px;
+        margin-left: 15px;
+    }
+    .aboutusdataValores img {
+        margin-left: 40px;
+    }
+    .whyOurs img {
+        width: 180px;
+    }
+}

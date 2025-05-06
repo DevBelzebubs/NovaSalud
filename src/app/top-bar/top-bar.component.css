@@ -4,6 +4,8 @@
     align-items:baseline;
     justify-content:space-around;
     font-family: Arial, Helvetica, sans-serif;
+    width: 98.8%;
+    margin-left: -10px;
 }
 .searchForm{
     align-items: center;
@@ -40,7 +42,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 98%;
+    width: 100%;
     padding: 10px 20px;
     background-color: #f8f9fa;
     border-top: 1px solid #ccc;
@@ -165,7 +167,6 @@
     }
 }
 
-/* Móviles (menores o iguales a 480px) */
 @media (max-width: 480px) {
     .topContainer img[alt="Logo"] {
         width: 280px;
