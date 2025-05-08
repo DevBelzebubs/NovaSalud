@@ -2,7 +2,7 @@
     <div class="enterUser">
         <div class="loginContainer">
             <img src="assets/img/login.png" alt="User" width="25px">
-            <span class="loginText">Iniciar Sesión</span>
+            <span class="loginText" (click)="login()">Iniciar Sesión</span>
         </div>
         <div class="registerContainer">
             <img src="assets/img/register.png" alt="User" width="25px">
@@ -14,15 +14,18 @@
         <div class="itemContainer">
             <div class="numberContainer">
                 <img src="assets/img/phone.png" alt="Phone" width="30px">
+                <label>Numero de contacto:</label>
                 <span class="phoneNumber">+57 123 456 7890</span>
             </div>
             <div class="emailContainer">
                 <img src="assets/img/email.png" alt="Email" width="30px">
+                <label>Correo:</label>
                 <span class="email">novasalud email.com</span>
             </div>
             <div class="openingHours">
                 <img src="assets/img/clock.png" alt="Clock" width="30px">
-                <span class="openingHoursText">Lunes a Viernes: 8:00 AM - 11:00 PM</span>
+                <label>Horario:</label>
+                <span class="openingHoursText">Lunes-Viernes: <br>8:00 AM - 11:00 PM</span>
             </div>
         </div>
     </div>

@@ -1,0 +1,78 @@
+.appContainer{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.imgBackground{
+    width: 1907px;
+    margin-left: -10px;
+    filter: blur(5px);
+    z-index: -1;
+}
+.userForm{
+    background: #f1f7fe;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 400px;
+    left: 775px;
+    width: 350px;
+    height: 385px;
+    align-items: center;
+    border-radius: 20px;
+    color: #010101
+}
+.form1{
+    margin-top: 30px;
+}
+.titulouserForm {
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+.formContainer{
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #fff;
+  margin: 1rem 0 .5rem;
+  width: 100%;
+}
+.formContainer input{
+  background: none;
+  border: 0;
+  outline: 0;
+  height: 40px;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  font-size: .9rem;
+  padding: 8px 15px;
+}
+.form1 button {
+    background-color: #0066ff;
+    color: #fff;
+    border: 0;
+    border-radius: 24px;
+    padding: 10px 100px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .3s ease;
+    margin-top: 30px;
+}
+.formSeccion {
+    margin-top: 80px;
+    padding: 8px;
+    padding-left: 81px;
+    padding-right: 80px;
+    padding-bottom: 10px;
+    font-size: .85rem;
+    border-radius: 0px 0px 20px 20px;
+    background-color: #e0ecfb;
+    box-shadow: rgb(0 0 0 / 8%) 0 -1px;
+  }
+.form1 button:hover {
+    background-color: #005ce6;
+}
+.formSeccion span{
+  font-weight: bold;
+  color: #0066ff;
+  transition: color .3s ease;
+}
+  

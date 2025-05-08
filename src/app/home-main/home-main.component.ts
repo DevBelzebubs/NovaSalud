@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
+import { TopBarComponent } from "../top-bar/top-bar.component";
+import { AboutUsComponent } from "../about-us/about-us.component";
 
 @Component({
   selector: 'app-home-main',
-  imports: [],
+  imports: [TopBarComponent, AboutUsComponent],
   templateUrl: './home-main.component.html',
   styleUrl: './home-main.component.css'
 })
 export class HomeMainComponent {
   img = ['assets/img/img1.jpg', 'assets/img/img2.jpg', 'assets/img/img3.jpg', 'assets/img/img4.jpg'];
   imgIndex = 0;
-  slideWith = 1921;
+  slideWith = 1911;
   get transformStyle(){
     return `translateX(-${this.imgIndex * this.slideWith}px)`;
   }

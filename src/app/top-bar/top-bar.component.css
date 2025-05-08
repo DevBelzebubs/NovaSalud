@@ -90,6 +90,27 @@
     align-items: center;
     gap: 45px;
 }
+.numberContainer label{
+    position: absolute;
+    top: 32px;
+    left: 815px;
+    font-size: 13px;
+}
+.emailContainer label{
+    position: absolute;
+    top: 32px;
+    left: 1025px;
+    font-size: 13px;
+}
+.openingHours label{
+    position: absolute;
+    top: 32px;
+    left: 1265px;
+    font-size: 13px;
+}
+.topContainer label{
+    color: #7ebcff;
+}
 @media (max-width: 1024px) {
     .topContainer {
         flex-direction: column;
