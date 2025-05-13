@@ -13,4 +13,10 @@ export class TopBarComponent {
   login(){
     this.route.navigate(['/login']);
   }
+  register(){
+    this.route.navigate(['/register']);
+  }
+  inicio(){
+    this.route.navigate(['/']);
+  }
 }
