@@ -76,3 +76,13 @@
   color: #0066ff;
   font-weight: bold;
 }
+.formBottom {
+    display: flex;
+    gap: 30px;
+    margin-top: -10px;
+}
+.checkboxGroup {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
