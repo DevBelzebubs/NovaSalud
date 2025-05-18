@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { TopBarComponent } from "../top-bar/top-bar.component";
+import { ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-pago',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule, TopBarComponent,ReactiveFormsModule],
   templateUrl: './pago.component.html',
   styleUrl: './pago.component.css'
 })
 export class PagoComponent {
   selectedMethod:string = '';
-    constructor(private route:Router) { }
+  paymentForm!: FormGroup;
+  constructor(private route:Router ,private fb: FormBuilder) {}
   onMethodChange(){
     if(this.selectedMethod === 'mercadoPago'){
       this.loadMercadoPago();

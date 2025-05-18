@@ -1,27 +1,38 @@
 <app-top-bar></app-top-bar>
-<div class="appointmentContainer">
+<form [formGroup]="appointmentForm" class="appointmentContainer">
   <div class="step stepSelection">
-    <h2>Paso 1: Seleccione especialidad</h2>
-    <select class="inputField">
-      <option disabled selected>Seleccione una especialidad</option>
-      <option>Cardiology</option>
-      <option>Dermatology</option>
+    <h2>Seleccione especialidad</h2>
+    <select class="inputField" formControlName="speciality">
+      <option value="" disabled>Seleccione una especialidad</option>
+      <option value="Cardiology">Cardiologia</option>
+      <option value="Dermatology">Dermatologia</option>
     </select>
-    <select class="inputField">
-      <option disabled selected>Seleccione un doctor</option>
-      <option>Dr. Smith</option>
-      <option>Dr. Johnson</option>
+    <div *ngIf="appointmentForm.get('speciality')?.invalid && appointmentForm.get('speciality')?.touched" class="error">
+      La especialidad es obligatoria.
+    </div>
+    <select class="inputField" formControlName="doctor">
+      <option value="" disabled>Seleccione un doctor</option>
+      <option value="Dr. Smith">Dr. Smith</option>
+      <option value="Dr. Johnson">Dr. Johnson</option>
     </select>
+    <div *ngIf="appointmentForm.get('doctor')?.invalid && appointmentForm.get('doctor')?.touched" class="error">
+      El doctor es obligatorio.
+    </div>
   </div>
-
   <div class="step stepSchedule">
-    <h2>Paso 2: Escoja fecha y hora</h2>
-    <input type="date" class="inputField">
-    <input type="time" class="inputField">
+    <h2>Escoja fecha y hora</h2>
+    <input type="date" class="inputField" formControlName="date">
+    <div *ngIf="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched" class="error">
+      La fecha es obligatoria.
+    </div>
+    <input type="time" class="inputField" formControlName="time">
+    <div *ngIf="appointmentForm.get('time')?.invalid && appointmentForm.get('time')?.touched" class="error">
+      La hora es obligatoria.
+    </div>
   </div>
-
   <div class="step stepConfirmation">
-    <h2>Paso 3: Confirme cita</h2>
-    <button class="primaryButton" (click)="confirmAppointment()">Book Appointment</button>
+    <h2>Confirme cita</h2>
+    <button type="button" class="primaryButton" (click)="confirmAppointment()">Book Appointment</button>
   </div>
-</div>
+</form>
+

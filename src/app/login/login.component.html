@@ -1,23 +1,42 @@
 <app-top-bar></app-top-bar>
 <div class="appContainer">
-    <img src="assets/img/login-background.png" class="imgBackground">
-    <div class="formsContainer">
-        <div class="userForm">
-            <form class="form1">
-                <div class="topText">
-                    <span class="title">¡Bienvenido!</span>
-                    <span class="subtitle">Porfavor acceda a su cuenta</span>
-                </div>
-                <span class="titulouserForm">Iniciar sesión</span>
-                <div class="formContainer">
-                    <input type="text" placeholder="Usuario..."><br>
-                    <input type="password" placeholder="Contraseña..."><br>
-                </div>
-                <button>Ingresar</button>
-            </form>
-            <div class="formSeccion1">
-                <p>¿Deseas registrar tu cita?<span class="reg">Registrate</span></p>
-            </div>
+  <img src="assets/img/login-background.png" class="imgBackground" />
+  <div class="formsContainer">
+    <div class="userForm">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="form1">
+        <div class="topText">
+          <span class="title">¡Bienvenido!</span>
+          <span class="subtitle">Por favor acceda a su cuenta</span>
         </div>
+        <span class="titulouserForm">Iniciar sesión</span>
+        <div *ngIf="loginForm.get('rol')?.invalid && loginForm.get('rol')?.touched" class="error">
+          El rol es obligatorio.
+        </div>
+        <div class="formContainer">
+          <div class="rolForm">
+            <label for="tipo">Tipo de usuario</label>
+            <select formControlName="rol">
+              <option value="" disabled selected>Seleccione un rol</option>
+              <option value="PACIENTE">Paciente</option>
+              <option value="DOCTOR">Doctor</option>
+              <option value="ADMIN">Administrador</option>
+            </select>
+          </div>
+          <input type="text" placeholder="Usuario..." formControlName="username"/><br />
+          <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="error">
+            El nombre de usuario es obligatorio.
+          </div>
+          <input type="password" placeholder="Contraseña..." formControlName="password"/><br/>
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error">
+            La contraseña es obligatoria.
+          </div>
+        </div>
+        <button type="submit">Ingresar</button>
+      </form>
+
+      <div class="formSeccion1">
+        <p>¿Deseas registrar tu cita?<span class="reg">Registrate</span></p>
+      </div>
     </div>
+  </div>
 </div>
