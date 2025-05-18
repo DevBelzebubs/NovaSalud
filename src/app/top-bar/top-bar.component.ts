@@ -25,4 +25,7 @@ export class TopBarComponent {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   }
+  registrarCita(){
+    this.route.navigate(['/citas']);
+  }
 }

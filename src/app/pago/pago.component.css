@@ -1,0 +1,78 @@
+.appContainer {
+  background-color: #f1f7fe;
+  width: 100%;
+  min-height: 100vh; /* Ocupa toda la altura visible */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.step {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 10px;
+  padding: 30px 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.step h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.inputField {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: #0066ff;
+  box-shadow: 0 0 6px #0066ff;
+}
+
+.primaryButton {
+  background-color: #0066ff;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 12px 35px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.primaryButton:hover {
+  background-color: #0052cc;
+}
+.qrCode{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#wallet_container {
+  margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .step {
+    padding: 20px 15px;
+    max-width: 100%;
+  }
+}
