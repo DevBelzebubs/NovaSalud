@@ -2,7 +2,7 @@ import { Role } from "./role";
 import { status } from "./status";
 
 export class user{
-    private id!:number;
+    id!:number;
     private nameUs!:string;
     private contraUs!:string;
     private name!:string;

@@ -8,15 +8,15 @@ import { Observable } from 'rxjs';
 })
 export class PatientServiceService {
 
-  url = '';
+  url = 'http://localhost:8080/api/paciente';
 
   constructor(private httpClient:HttpClient){}
 
   addPatient(patient:patient):Observable<patient>{
-    return this.httpClient.post<patient>(this.url, patient);
+    return this.httpClient.post<patient>(this.url + '/registrar', patient);
   }
   listPatients():Observable<patient[]>{
-    return this.httpClient.get<patient[]>(this.url);
+    return this.httpClient.get<patient[]>(this.url + '/listar');
   }
   getPatient(id:number):Observable<patient>{
     return this.httpClient.get<patient>(this.url + '/' + id);
@@ -25,6 +25,6 @@ export class PatientServiceService {
     return this.httpClient.put<patient>(this.url + '/' + patient.id, patient);
   }
   deletePatient(id:number):Observable<patient>{
-    return this.httpClient.delete<patient>(this.url + '/' + id);
+    return this.httpClient.delete<patient>(this.url + '/eliminar' + id);
   }
 }

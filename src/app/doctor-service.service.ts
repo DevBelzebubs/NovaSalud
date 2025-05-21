@@ -8,19 +8,19 @@ import { doctor } from '../models/doctor';
 })
 export class DoctorServiceService {
 
-  url = ''
+  url = 'http://localhost:8080/api/doctor'
   constructor(private httpClient:HttpClient){}
   addDoctor(doctor:any):Observable<doctor>{
-    return this.httpClient.post<any>(this.url, doctor);
+    return this.httpClient.post<any>(this.url + '/registar', doctor);
   }
   listDoctors():Observable<doctor[]>{
-    return this.httpClient.get<any[]>(this.url);
+    return this.httpClient.get<any[]>(this.url +'/listar');
   }
   getDoctor(id:number):Observable<doctor>{
     return this.httpClient.get<any>(this.url + '/' + id);
   }
   editDoctor(doctor:any):Observable<doctor>{
-    return this.httpClient.put<any>(this.url + '/' + doctor.id, doctor);
+    return this.httpClient.put<any>(this.url + '/editar/' + doctor.id, doctor);
   }
   deleteDoctor(id:number):Observable<doctor>{
     return this.httpClient.delete<any>(this.url + '/' + id);

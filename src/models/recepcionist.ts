@@ -1,7 +1,7 @@
 import { user } from "./user";
 
 export class receptionist{
-    private id!:number;
+    id!:number;
     private user!:user;
     constructor(id:number,user:user){
         this.id=id;

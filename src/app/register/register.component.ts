@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { user } from '../../models/user';
 import { patient } from '../../models/patient';
 import { doctor } from '../../models/doctor';
+import { PatientServiceService } from '../patient-service.service';
+import { UserServiceService } from '../user-service.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +16,7 @@ import { doctor } from '../../models/doctor';
 })
 export class RegisterComponent {
   registerForm!:FormGroup;
-  constructor(private fb:FormBuilder) {}
+  constructor(private fb:FormBuilder,private patientService:PatientServiceService,private userService:UserServiceService) {}
   usuariosRegistrados: (user | patient | doctor)[] = [];
   ngOnInit(){
     this.registerForm = this.fb.group({
@@ -31,7 +33,7 @@ export class RegisterComponent {
     if(this.registerForm.valid){
       const data = this.registerForm.value;
       const newUser = new user(
-      this.getRandomId(),
+      0,
       data.username,
       data.password,
       data.nombre,
@@ -42,25 +44,24 @@ export class RegisterComponent {
       data.rol,
       data.status
     );
-    let newEntity:user | patient | doctor;
-    if(data.rol === 'paciente'){
-      newEntity = new patient(this.getRandomId(),newUser,0,0);
-    }else if(data.rol === 'doctor'){
-      newEntity = new doctor();
-    }else{
-      newEntity = newUser;
-    }
-    if(newEntity){
-      this.usuariosRegistrados.push(newEntity);
-      this.registerForm.reset();
-      console.log(this.usuariosRegistrados);
-      console.log(newEntity);
-      alert('Usuario registrado con éxito');
-    }
-
+    this.userService.addUser(newUser).subscribe({
+      next: (response) => {
+        const patientEntity = new patient(0,response,0,0);
+        this.patientService.addPatient(patientEntity).subscribe({
+          next: (response) => {
+            console.log('Usuario registrado con éxito:', response);
+            this.usuariosRegistrados.push(response);
+            this.registerForm.reset();
+          },
+          error: (error) => {
+            console.error('Error al registrar paciente:', error);
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error al registrar usuario:', error);
+      }
+    })
     }
   }
-  getRandomId(): number {
-  return Math.floor(Math.random() * 10000);
-}
 }
