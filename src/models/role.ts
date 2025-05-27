@@ -1,8 +1,8 @@
 export class Role{
-    private id!:number;
-    private nameRole!:string;
-    constructor(id:number,nameRole:string){
+    private id!:undefined|number;
+    private nombreRol!:string;
+    constructor(id:undefined | number,nameRole:string){
         this.id=id;
-        this.nameRole=nameRole;
+        this.nombreRol=nameRole;
     }
 }

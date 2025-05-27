@@ -25,6 +25,6 @@ export class PatientServiceService {
     return this.httpClient.put<patient>(this.url + '/' + patient.id, patient);
   }
   deletePatient(id:number):Observable<patient>{
-    return this.httpClient.delete<patient>(this.url + '/eliminar' + id);
+    return this.httpClient.delete<patient>(this.url + '/eliminar/' + id);
   }
 }

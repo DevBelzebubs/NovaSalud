@@ -7,6 +7,8 @@ import { patient } from '../../models/patient';
 import { doctor } from '../../models/doctor';
 import { PatientServiceService } from '../patient-service.service';
 import { UserServiceService } from '../user-service.service';
+import { switchMap } from 'rxjs';
+import { Role } from '../../models/role';
 
 @Component({
   selector: 'app-register',
@@ -29,39 +31,53 @@ export class RegisterComponent {
       sexo: ['', Validators.required]
     });
   }
-  onRegister(){
-    if(this.registerForm.valid){
-      const data = this.registerForm.value;
-      const newUser = new user(
-      0,
+  onRegister() {
+  if (this.registerForm.valid) {
+    const data = this.registerForm.value;
+    const newUser = new user(
+      undefined,
       data.username,
       data.password,
       data.nombre,
       data.apellido,
-      data.dni,
       data.numero,
       data.sexo,
-      data.rol,
-      data.status
+      { nombreRol: 'ROL_PACIENTE' }
     );
+
     this.userService.addUser(newUser).subscribe({
-      next: (response) => {
-        const patientEntity = new patient(0,response,0,0);
-        this.patientService.addPatient(patientEntity).subscribe({
-          next: (response) => {
-            console.log('Usuario registrado con éxito:', response);
-            this.usuariosRegistrados.push(response);
+      next: (userResponse) => {
+        console.log('Usuario registrado con éxito', userResponse);
+        const userWithoutRole = new user(
+          undefined,
+          userResponse.nombreUsua,
+          userResponse.contrasena,
+          userResponse.nombre,
+          userResponse.apellido,
+          userResponse.numero,
+          userResponse.sexo
+          // Sin rol
+        );
+        const newPatient = new patient(undefined, data.dni, userWithoutRole);
+        this.patientService.addPatient(newPatient).subscribe({
+          next: (pacienteResponse) => {
+            console.log('Paciente registrado con éxito', pacienteResponse);
+            this.usuariosRegistrados.push(pacienteResponse);
             this.registerForm.reset();
           },
           error: (error) => {
             console.error('Error al registrar paciente:', error);
+            console.log(JSON.stringify(newPatient, null, 2));
           }
         });
       },
       error: (error) => {
         console.error('Error al registrar usuario:', error);
+        console.log(JSON.stringify(newUser, null, 2));
       }
-    })
     }
+  );
   }
+}
+
 }
