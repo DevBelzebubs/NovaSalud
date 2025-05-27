@@ -6,11 +6,13 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { SpecialitiesComponent } from './specialities/specialities.component';
 import { RegisterAppointmentComponent } from './register-appointment/register-appointment.component';
 import { PagoComponent } from './pago/pago.component';
+import { HistorialCitasComponent } from './historial-citas/historial-citas.component';
 
 export const routes: Routes = [
     {path:'',component:HomeMainComponent},
     {path:'login',component:LoginComponent},
     {path:'register',component:RegisterComponent},
     {path:'citas',component:RegisterAppointmentComponent},
-    {path:'pago',component:PagoComponent}
+    {path:'pago',component:PagoComponent},
+    {path:'historial',component:HistorialCitasComponent}
 ];

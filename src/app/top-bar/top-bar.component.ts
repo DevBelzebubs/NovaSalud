@@ -28,4 +28,7 @@ export class TopBarComponent {
   registrarCita(){
     this.route.navigate(['/citas']);
   }
+  historialMedico(){
+    this.route.navigate(['/historial'])
+  }
 }
