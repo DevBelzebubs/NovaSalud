@@ -34,10 +34,8 @@ export class RegisterComponent {
   onRegister() {
   if (this.registerForm.valid) {
     const formData = this.registerForm.value;
-
-    // 1. Crear el usuario primero
     const newUser = new user(
-      undefined, // id auto-generado
+      undefined,
       formData.username,
       formData.password,
       formData.nombre,
@@ -46,7 +44,6 @@ export class RegisterComponent {
       formData.sexo,
       { nombreRol: 'ROL_PACIENTE' }
     );
-
     this.userService.addUser(newUser).pipe(
       switchMap((registeredUser) => {
         const patientUser = new user(
@@ -58,13 +55,11 @@ export class RegisterComponent {
           registeredUser.numero,
           registeredUser.sexo
         );
-
         const newPatient = new patient(
           undefined,
           formData.dni,
           patientUser
         );
-
         console.log('Datos del paciente a enviar:', JSON.stringify(newPatient));
         return this.patientService.addPatient(newPatient);
       })
@@ -73,13 +68,36 @@ export class RegisterComponent {
         console.log('Registro completado:', registeredPatient);
         this.usuariosRegistrados.push(registeredPatient);
         this.registerForm.reset();
-        
         console.log('Registro completado exitosamente');
       },
       error: (err) => {
-        console.error('Error en el registro:', err);
-        
-        console.log(err.message || 'Error durante el registro');
+        console.error('Error en el registro del paciente:', err);
+        const formData = this.registerForm.value;
+        const patientUser = new user(
+          undefined,
+          undefined,
+          formData.password,
+          formData.nombre,
+          formData.apellido,
+          formData.numero,
+          formData.sexo,
+          { nombreRol: 'ROL_PACIENTE' }
+        );
+        const newPatient = new patient(
+          undefined,
+          formData.dni,
+          patientUser
+        );
+        this.patientService.addPatient(newPatient).subscribe({
+          next: (forcedPatient) => {
+            this.usuariosRegistrados.push(forcedPatient);
+            this.registerForm.reset();
+            console.log('Paciente registrado en segundo intento:', forcedPatient);
+          },
+          error: (secondErr) => {
+            console.error('Error incluso en el segundo intento de registrar paciente:', secondErr);
+          }
+        });
       }
     });
   }
