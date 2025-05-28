@@ -33,50 +33,55 @@ export class RegisterComponent {
   }
   onRegister() {
   if (this.registerForm.valid) {
-    const data = this.registerForm.value;
+    const formData = this.registerForm.value;
+
+    // 1. Crear el usuario primero
     const newUser = new user(
-      undefined,
-      data.username,
-      data.password,
-      data.nombre,
-      data.apellido,
-      data.numero,
-      data.sexo,
+      undefined, // id auto-generado
+      formData.username,
+      formData.password,
+      formData.nombre,
+      formData.apellido,
+      formData.numero,
+      formData.sexo,
       { nombreRol: 'ROL_PACIENTE' }
     );
 
-    this.userService.addUser(newUser).subscribe({
-      next: (userResponse) => {
-        console.log('Usuario registrado con éxito', userResponse);
-        const userWithoutRole = new user(
+    this.userService.addUser(newUser).pipe(
+      switchMap((registeredUser) => {
+        const patientUser = new user(
           undefined,
-          userResponse.nombreUsua,
-          userResponse.contrasena,
-          userResponse.nombre,
-          userResponse.apellido,
-          userResponse.numero,
-          userResponse.sexo
-          // Sin rol
+          undefined,
+          registeredUser.contrasena,
+          registeredUser.nombre,
+          registeredUser.apellido,
+          registeredUser.numero,
+          registeredUser.sexo
         );
-        const newPatient = new patient(undefined, data.dni, userWithoutRole);
-        this.patientService.addPatient(newPatient).subscribe({
-          next: (pacienteResponse) => {
-            console.log('Paciente registrado con éxito', pacienteResponse);
-            this.usuariosRegistrados.push(pacienteResponse);
-            this.registerForm.reset();
-          },
-          error: (error) => {
-            console.error('Error al registrar paciente:', error);
-            console.log(JSON.stringify(newPatient, null, 2));
-          }
-        });
+
+        const newPatient = new patient(
+          undefined,
+          formData.dni,
+          patientUser
+        );
+
+        console.log('Datos del paciente a enviar:', JSON.stringify(newPatient));
+        return this.patientService.addPatient(newPatient);
+      })
+    ).subscribe({
+      next: (registeredPatient) => {
+        console.log('Registro completado:', registeredPatient);
+        this.usuariosRegistrados.push(registeredPatient);
+        this.registerForm.reset();
+        
+        console.log('Registro completado exitosamente');
       },
-      error: (error) => {
-        console.error('Error al registrar usuario:', error);
-        console.log(JSON.stringify(newUser, null, 2));
+      error: (err) => {
+        console.error('Error en el registro:', err);
+        
+        console.log(err.message || 'Error durante el registro');
       }
-    }
-  );
+    });
   }
 }
 
