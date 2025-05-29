@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { TopBarComponent } from "../top-bar/top-bar.component";
+import { prescription } from '../../models/prescription';
+import { appointment } from '../../models/appointment';
 
 @Component({
   selector: 'app-historial-citas',
@@ -8,5 +10,5 @@ import { TopBarComponent } from "../top-bar/top-bar.component";
   styleUrl: './historial-citas.component.css'
 })
 export class HistorialCitasComponent {
-
+  citas:appointment[] = [];
 }

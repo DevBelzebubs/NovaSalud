@@ -2,7 +2,7 @@ import { doctor } from "./doctor";
 
 export class speciality{
     private id!: number;
-    private name!: string;
+    public name!: string;
     private description!: string;
     private doctor!:doctor[];
 

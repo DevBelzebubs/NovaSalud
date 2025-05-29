@@ -5,8 +5,8 @@ import { prescription } from "./prescription";
 
 export class doctor{
     private id!:number;
-    private speciality!: speciality;
-    private user!:user;
+    public speciality!: speciality;
+    public user!:user;
     private atentionHour!:Time;
     private prescription!:prescription[];
 }

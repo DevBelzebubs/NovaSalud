@@ -1,2 +1,21 @@
 <app-top-bar></app-top-bar>
-<p>historial-citas works!</p>
+<div class="appContainer">
+    <h1>Citas médicas</h1>
+    <div class="citasMain">
+        <div class="citasContainer">
+            @for (item of citas; track $index){
+                <div class="citasItem">
+                    <h2>Id: {{item.id}}</h2>
+                    <h2>{{item.dateAppointment}} + {{item.timeAppointment}}</h2>
+                    <div class="doctorContainer">
+                        <h2>Doctor: {{item.doctor.user.nombre}}</h2>
+                        <h2>Especialidad: {{item.doctor.speciality.name}}</h2>
+                    </div>
+                    <div class="prescripctionContainer">
+                        <h2></h2>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
