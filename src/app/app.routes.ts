@@ -8,6 +8,7 @@ import { RegisterAppointmentComponent } from './register-appointment/register-ap
 import { PagoComponent } from './pago/pago.component';
 import { HistorialCitasComponent } from './historial-citas/historial-citas.component';
 import { AuthGuard } from './guards/auth.guard';
+import { DoctorMainComponent } from './doctor-main/doctor-main.component';
 
 export const routes: Routes = [
     {path:'',component:HomeMainComponent},
@@ -15,5 +16,6 @@ export const routes: Routes = [
     {path:'register',component:RegisterComponent},
     {path:'citas',component:RegisterAppointmentComponent, canActivate:[AuthGuard] },
     {path:'pago',component:PagoComponent},
-    {path:'historial',component:HistorialCitasComponent}
+    {path:'historial',component:HistorialCitasComponent},
+    {path:'doctor',component:DoctorMainComponent}
 ];

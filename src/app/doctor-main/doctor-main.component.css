@@ -1,0 +1,29 @@
+.appContainer{
+    width: 70%;
+    margin: auto;
+    margin-top: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.topButtons{
+    display: flex;
+    gap: 30px;
+    color: white;
+}
+.registrarHorariobtn{
+    all: unset;
+    background-color: #31c453;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #31c453;
+    cursor: pointer;
+}
+.salirbtn{
+    all: unset;
+    background-color: #dc3545;
+    padding: 10px;
+    border: 1px solid;
+    border-color: #dc3545;
+    cursor: pointer;
+    border-radius: 10px;
+}

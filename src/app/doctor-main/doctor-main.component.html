@@ -1,0 +1,24 @@
+<app-top-bar></app-top-bar>
+<div class="appContainer">
+    <div class="topButtons">
+        <button class="registrarHorariobtn">Registrar horario</button>
+        <button class="salirbtn">Salir</button>
+    </div>
+    <div class="citasContainer">
+        <h4>Citas registradas:</h4>
+        <div class="citasMain">
+            @for (item of citas; track $index){
+                <div class="citasContent">
+                    <div class="topCitas">
+                        <h3>#{{item.id}}</h3>
+                        <h3>{{item.patient}}</h3>
+                    </div>
+                    <div class="bottomCitas">
+                        <p>{{item.dateAppointment}}</p>
+                        <p>{{item.timeAppointment}}</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
