@@ -27,3 +27,11 @@
     cursor: pointer;
     border-radius: 10px;
 }
+.registrarHorariobtn:hover{
+    background-color: #31b650;
+    transition: background-color 0.4s;
+}
+.salirbtn:hover{
+    background-color: #c93241;
+    transition: background-color 0.4s;
+}
