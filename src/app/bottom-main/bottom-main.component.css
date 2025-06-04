@@ -1,0 +1,45 @@
+.appContainer{
+    font-family: Arial, Helvetica, sans-serif;
+    color:white;
+    margin-top: 60px;
+}
+.bottomImg{
+    width: 100.86%;
+    filter: brightness(0.3);
+    object-fit: cover;
+    flex-shrink: 0;
+    height: 400px;
+    margin-left: -8px;
+    margin-bottom: -12px;
+}
+.bottomtextContainer{
+    width: 20%;
+}
+.bottomText{
+    position: absolute;
+    top:3300px;
+    display: flex;
+    flex-direction: row;
+    width: 65%;
+    justify-content:space-between;
+    margin-left: 315px;
+}
+.whatsNew{
+    width: 25%;
+}
+.footerContainer{
+    background: #222;
+    padding: 20px;
+    margin-bottom: -10px;
+    margin-left: -8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 493.7%;
+}
+.footerItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}

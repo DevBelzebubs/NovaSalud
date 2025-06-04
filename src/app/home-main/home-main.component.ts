@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { TopBarComponent } from "../top-bar/top-bar.component";
 import { AboutUsComponent } from "../about-us/about-us.component";
 import { SpecialitiesComponent } from "../specialities/specialities.component";
+import { BottomMainComponent } from "../bottom-main/bottom-main.component";
 
 @Component({
   selector: 'app-home-main',
-  imports: [TopBarComponent, AboutUsComponent, SpecialitiesComponent],
+  imports: [TopBarComponent, AboutUsComponent, SpecialitiesComponent, BottomMainComponent],
   templateUrl: './home-main.component.html',
   styleUrl: './home-main.component.css'
 })

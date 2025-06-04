@@ -10,6 +10,7 @@ import { HistorialCitasComponent } from './historial-citas/historial-citas.compo
 import { AuthGuard } from './guards/auth.guard';
 import { DoctorMainComponent } from './doctor-main/doctor-main.component';
 import { DoctorRegisterComponent } from './doctor-register/doctor-register.component';
+import { AdminMainComponent } from './admin-main/admin-main.component';
 
 export const routes: Routes = [
     {path:'',component:HomeMainComponent},
@@ -19,5 +20,6 @@ export const routes: Routes = [
     {path:'pago',component:PagoComponent},
     {path:'historial',component:HistorialCitasComponent},
     {path:'doctor',component:DoctorMainComponent},
-    {path:'registrar-horario',component:DoctorRegisterComponent}
+    {path:'registrar-horario',component:DoctorRegisterComponent},
+    {path:'admin',component:AdminMainComponent}
 ];
