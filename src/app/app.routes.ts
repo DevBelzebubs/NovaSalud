@@ -11,6 +11,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { DoctorMainComponent } from './doctor-main/doctor-main.component';
 import { DoctorRegisterComponent } from './doctor-register/doctor-register.component';
 import { AdminMainComponent } from './admin-main/admin-main.component';
+import { RegDoctorComponent } from './reg-doctor/reg-doctor.component';
+import { RegRecepcionistComponent } from './reg-recepcionist/reg-recepcionist.component';
 
 export const routes: Routes = [
     {path:'',component:HomeMainComponent},
@@ -21,5 +23,7 @@ export const routes: Routes = [
     {path:'historial',component:HistorialCitasComponent},
     {path:'doctor',component:DoctorMainComponent},
     {path:'registrar-horario',component:DoctorRegisterComponent},
-    {path:'admin',component:AdminMainComponent}
+    {path:'admin',component:AdminMainComponent},
+    {path:'registrar-doctor',component:RegDoctorComponent},
+    {path:'registrar-recepcionista',component:RegRecepcionistComponent}
 ];

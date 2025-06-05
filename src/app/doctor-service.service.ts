@@ -10,19 +10,19 @@ export class DoctorServiceService {
 
   url = 'http://localhost:8080/api/doctor'
   constructor(private httpClient:HttpClient){}
-  addDoctor(doctor:any):Observable<doctor>{
-    return this.httpClient.post<any>(this.url + '/registar', doctor);
+  addDoctor(doctor:doctor):Observable<doctor>{
+    return this.httpClient.post<doctor>(this.url + '/registrar', doctor);
   }
   listDoctors():Observable<doctor[]>{
-    return this.httpClient.get<any[]>(this.url +'/listar');
+    return this.httpClient.get<doctor[]>(this.url +'/listar');
   }
   getDoctor(id:number):Observable<doctor>{
-    return this.httpClient.get<any>(this.url + '/' + id);
+    return this.httpClient.get<doctor>(this.url + '/' + id);
   }
-  editDoctor(doctor:any):Observable<doctor>{
-    return this.httpClient.put<any>(this.url + '/editar/' + doctor.id, doctor);
+  editDoctor(doctor:doctor):Observable<doctor>{
+    return this.httpClient.put<doctor>(this.url + '/editar/' + doctor.id, doctor);
   }
   deleteDoctor(id:number):Observable<doctor>{
-    return this.httpClient.delete<any>(this.url + '/' + id);
+    return this.httpClient.delete<doctor>(this.url + '/eliminar' + id);
   }
 }

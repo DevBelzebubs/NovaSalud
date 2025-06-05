@@ -18,7 +18,7 @@ import { Role } from '../../models/role';
 })
 export class RegisterComponent {
   registerForm!:FormGroup;
-  constructor(private fb:FormBuilder,private patientService:PatientServiceService,private userService:UserServiceService) {}
+  constructor(private fb:FormBuilder,private patientService:PatientServiceService) {}
   usuariosRegistrados: (user | patient | doctor)[] = [];
   ngOnInit(){
     this.registerForm = this.fb.group({

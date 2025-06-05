@@ -4,11 +4,10 @@ import { user } from "./user";
 import { prescription } from "./prescription";
 
 export class doctor{
-    constructor(public nombre:string, 
-        public apellido:string, 
-        public numero:string,
-        public sexo:string, 
-        public especialidad:string, 
+    constructor(
+        public id:number | undefined,
+        public usuario:user,
+        public especialidad:speciality, 
         public horarioAtencion:string) {
   }
 }
