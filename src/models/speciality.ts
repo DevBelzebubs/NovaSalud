@@ -1,13 +1,13 @@
 import { doctor } from "./doctor";
 
 export class speciality{
-    private id: number | undefined;
-    public name!: string;
-    private description!: string;
-    private doctor!:doctor[];
+    id!: number;
+    nombre?: string;
+    descripcion?: string;
 
-    constructor(id: number | undefined, name: string) {
+    constructor(id: number, nombre?: string, descripcion?: string) {
         this.id = id;
-        this.name = name;
-    }
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+  }
 }

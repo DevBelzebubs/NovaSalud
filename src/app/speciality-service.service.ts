@@ -6,9 +6,9 @@ import { speciality } from '../models/speciality';
   providedIn: 'root'
 })
 export class SpecialityServiceService {
-
-  constructor(private httpClient:HttpClient, private speciality:speciality){}
+  url = 'http://localhost:8080/api/especialidades'
+  constructor(private httpClient:HttpClient){}
   listSpeciality(){
-    return this.httpClient.get<speciality[]>()
+    return this.httpClient.get<speciality[]>(this.url + '/listar');
   }
 }

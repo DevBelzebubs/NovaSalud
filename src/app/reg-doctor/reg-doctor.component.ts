@@ -6,15 +6,17 @@ import { CommonModule } from '@angular/common';
 import { doctor } from '../../models/doctor';
 import { user } from '../../models/user';
 import { speciality } from '../../models/speciality';
+import { SpecialityServiceService } from '../speciality-service.service';
 @Component({
   selector: 'app-reg-doctor',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './reg-doctor.component.html',
   styleUrl: './reg-doctor.component.css'
 })
 export class RegDoctorComponent {
     doctorForm!:FormGroup;
-    constructor(private fb:FormBuilder,private doctorService:DoctorServiceService){}
+    especialidades:speciality[] = []
+    constructor(private fb:FormBuilder,private doctorService:DoctorServiceService,private specialityService:SpecialityServiceService){}
     ngOnInit(){
       this.doctorForm = this.fb.group({
           nombreUsuario:['',Validators.required],
@@ -25,7 +27,11 @@ export class RegDoctorComponent {
           sexo:['',Validators.required],
           especialidad:['',Validators.required],
           horarioAtencion:['',Validators.required]
+          
       })
+      this.specialityService.listSpeciality().subscribe(data =>{
+          this.especialidades = data;
+        })
     }
     onRegister(){
       if(this.doctorForm.valid){
@@ -39,11 +45,11 @@ export class RegDoctorComponent {
           formData.numero,
           formData.sexo,
         )
-        const specialities = new speciality(undefined,formData.especialidad);
+        const especialidadSeleccionada = new speciality(formData.especialidad);
         const newDoctor = new doctor(
           undefined,
           doctorUser,
-          specialities,
+          especialidadSeleccionada,
           formData.horarioAtencion
         );
         console.log(JSON.stringify(doctorUser));
