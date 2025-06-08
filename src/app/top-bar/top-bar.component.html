@@ -1,46 +1,78 @@
 <nav class="appContainer">
-    <div class="enterUser">
-        <div class="loginContainer">
-            <img src="assets/img/login.png" alt="User" width="25px">
-            <span class="loginText" (click)="login()">Iniciar Sesión</span>
-        </div>
-        <div class="registerContainer">
-            <img src="assets/img/register.png" alt="User" width="25px">
-            <span class="registerText" (click)="register()">Registrarse</span>
-        </div>
+  @if(!username){
+  <div class="enterUser">
+    <div class="loginContainer">
+      <img src="assets/img/login.png" alt="User" width="25px" />
+      <span class="loginText" (click)="login()">Iniciar Sesión</span>
     </div>
-    <div class="topContainer">
-        <img src="assets/img/logo.png" alt="Logo" width="244px">
-        <div class="itemContainer">
-            <div class="numberContainer">
-                <img src="assets/img/phone.png" alt="Phone" width="30px">
-                <label>Numero de contacto:</label>
-                <span class="phoneNumber">+51 952 014 938</span>
-            </div>
-            <div class="emailContainer">
-                <img src="assets/img/email.png" alt="Email" width="30px">
-                <label>Correo:</label>
-                <span class="email">novasalud&#64;email.com</span>
-            </div>
-            <div class="openingHours">
-                <img src="assets/img/clock.png" alt="Clock" width="30px">
-                <label>Horario:</label>
-                <span class="openingHoursText">Lunes-Viernes: <br>8:00 AM - 11:00 PM</span>
-            </div>
-        </div>
+    <div class="registerContainer">
+      <img src="assets/img/register.png" alt="User" width="25px" />
+      <span class="registerText" (click)="register()">Registrarse</span>
     </div>
-    <div class="bottomContainer">
-        <div class="optionsContainer">
-            <div class="optionsRedirect">
-                <span class="optionItem" style="font-size: 150%" (click)="inicio()">Inicio</span>
-                <span class="optionItem" style="font-size: 150%" (click)="goTo('about-us')">Acerca de Nosotros</span>
-                <span class="optionItem" style="font-size: 150%" (click)="goTo('specialities')">Especialidades</span>
-            </div>
-            <div class="optionsRedirect">
-                <span class="optionItem" style="font-size: 150%" (click)="registrarCita()">Registrar cita</span>
-                <span class="optionItem" style="font-size: 150%" (click)="historialMedico()">Historial de citas</span>
-            </div>
-            <span class="optionItem" style="font-size: 150%"></span>
-          </div>
+  </div>
+  } @if (username){
+  <div class="enterUser">
+    <img src="assets/img/login.png" alt="User" width="25px" />
+    <span class="loginText">Bienvenido, {{ username }}</span>
+    <span class="registerText" (click)="logout()">Cerrar sesión</span>
+  </div>
+  }
+  <div class="topContainer">
+    <img src="assets/img/logo.png" alt="Logo" width="244px" />
+    <div class="itemContainer">
+      <div class="numberContainer">
+        <img src="assets/img/phone.png" alt="Phone" width="30px" />
+        <label>Numero de contacto:</label>
+        <span class="phoneNumber">+51 952 014 938</span>
+      </div>
+      <div class="emailContainer">
+        <img src="assets/img/email.png" alt="Email" width="30px" />
+        <label>Correo:</label>
+        <span class="email">novasalud&#64;email.com</span>
+      </div>
+      <div class="openingHours">
+        <img src="assets/img/clock.png" alt="Clock" width="30px" />
+        <label>Horario:</label>
+        <span class="openingHoursText"
+          >Lunes-Viernes: <br />8:00 AM - 11:00 PM</span
+        >
+      </div>
     </div>
+  </div>
+  <div class="bottomContainer">
+    <div class="optionsContainer">
+      <div class="optionsRedirect">
+        <span class="optionItem" style="font-size: 150%" (click)="inicio()"
+          >Inicio</span
+        >
+        <span
+          class="optionItem"
+          style="font-size: 150%"
+          (click)="goTo('about-us')"
+          >Acerca de Nosotros</span
+        >
+        <span
+          class="optionItem"
+          style="font-size: 150%"
+          (click)="goTo('specialities')"
+          >Especialidades</span
+        >
+      </div>
+      <div class="optionsRedirect">
+        <span
+          class="optionItem"
+          style="font-size: 150%"
+          (click)="registrarCita()"
+          >Registrar cita</span
+        >
+        <span
+          class="optionItem"
+          style="font-size: 150%"
+          (click)="historialMedico()"
+          >Historial de citas</span
+        >
+      </div>
+      <span class="optionItem" style="font-size: 150%"></span>
+    </div>
+  </div>
 </nav>

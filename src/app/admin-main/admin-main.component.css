@@ -1,4 +1,3 @@
-/* Contenedor principal */
 .appContainer {
     max-width: 900px;
     margin: 2rem auto;
@@ -9,7 +8,6 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Gestión de usuarios */
 .userManagementContainer {
     margin-bottom: 2rem;
     text-align: center;
@@ -21,7 +19,6 @@
     margin-bottom: 1rem;
 }
 
-/* Botones */
 .userManagement button {
     padding: 0.8rem 1.5rem;
     margin: 0.5rem;
@@ -42,7 +39,6 @@
     color: white;
 }
 
-/* Tabla de especialidades */
 .specialitiesTableContainer {
     background-color: #ffffff;
     padding: 1.5rem;

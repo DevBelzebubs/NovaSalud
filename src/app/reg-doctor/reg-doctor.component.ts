@@ -7,6 +7,7 @@ import { doctor } from '../../models/doctor';
 import { user } from '../../models/user';
 import { speciality } from '../../models/speciality';
 import { SpecialityServiceService } from '../speciality-service.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-reg-doctor',
   imports: [ReactiveFormsModule,CommonModule],
@@ -16,7 +17,7 @@ import { SpecialityServiceService } from '../speciality-service.service';
 export class RegDoctorComponent {
     doctorForm!:FormGroup;
     especialidades:speciality[] = []
-    constructor(private fb:FormBuilder,private doctorService:DoctorServiceService,private specialityService:SpecialityServiceService){}
+    constructor(private fb:FormBuilder,private doctorService:DoctorServiceService,private specialityService:SpecialityServiceService,private route:Router){}
     ngOnInit(){
       this.doctorForm = this.fb.group({
           nombreUsuario:['',Validators.required],
@@ -63,5 +64,8 @@ export class RegDoctorComponent {
           }
         })
       }
+    }
+    exit(){
+      this.route.navigate(['']);
     }
 }

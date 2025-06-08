@@ -1,4 +1,5 @@
 <div class="appContainer">
+    <button class="exitBtn" (click)="exit()">Salir</button>
     <h1>Registrar doctor</h1>
     <div class="formDoctorContainer">
         <form [formGroup]="doctorForm" (ngSubmit)="onRegister()">

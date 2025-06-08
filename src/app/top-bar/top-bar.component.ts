@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {ActivatedRoute, Route, Router} from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -8,8 +9,18 @@ import {ActivatedRoute, Route, Router} from '@angular/router';
   styleUrl: './top-bar.component.css'
 })
 export class TopBarComponent {
-  
-  constructor(private route: Router){}
+  public username: string | null = null;
+  nombre: string = '';
+  constructor(private route: Router, private authService:AuthService){}
+  ngOnInit() {
+    this.authService.currentUser$.subscribe(user => {
+      if(user){
+        this.username = user;
+      }
+
+    });
+    this.authService.loadUserData();
+  }
   login(){
     this.route.navigate(['/login']);
   }
@@ -24,6 +35,9 @@ export class TopBarComponent {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  }
+  logout(){
+    this.authService.logout();
   }
   registrarCita(){
     this.route.navigate(['/citas']);

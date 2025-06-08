@@ -37,7 +37,7 @@ export class RegisterComponent {
 
     const patientUser = new user(
       undefined,
-      formData.username,
+      undefined,
       formData.password,
       formData.nombre,
       formData.apellido,
