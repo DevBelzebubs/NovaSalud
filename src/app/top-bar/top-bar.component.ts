@@ -17,7 +17,6 @@ export class TopBarComponent {
       if(user){
         this.username = user;
       }
-
     });
     this.authService.loadUserData();
   }

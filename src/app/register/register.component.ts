@@ -34,7 +34,6 @@ export class RegisterComponent {
   onRegister() {
   if (this.registerForm.valid) {
     const formData = this.registerForm.value;
-
     const patientUser = new user(
       undefined,
       undefined,
@@ -51,9 +50,7 @@ export class RegisterComponent {
       formData.dni,
       patientUser
     );
-
     console.log('Datos del paciente a enviar:', JSON.stringify(newPatient));
-
     this.patientService.addPatient(newPatient).subscribe({
       next: (registeredPatient) => {
         console.log(registeredPatient);
@@ -61,7 +58,7 @@ export class RegisterComponent {
         this.registerForm.reset();
       },
       error: (err) => {
-        console.error( err);
+        console.error(err);
       }
     });
   }

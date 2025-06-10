@@ -13,12 +13,16 @@
                 <tr>
                     <th>Especialidades</th>
                 </tr>
-                <tr>
-                    <td>asa</td>
-                </tr>
-                <tr> 
-                    <td>aea</td>
-                </tr>
+                @for (item of specialities; track $index){
+                    <tr>
+                        <td>{{ item.nombre }}
+                            <div class="tableButtons">
+                                 <button class="addButton" (click)="editSpeciality()">Editar</button>
+                                <button class="deleteButton" (click)="deleteSpeciality()">Eliminar</button>
+                            </div>
+                        </td>
+                    </tr>
+                }
             </table>
         </div>
     </div>

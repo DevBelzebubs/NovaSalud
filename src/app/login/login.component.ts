@@ -7,6 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
@@ -32,23 +33,33 @@ export class LoginComponent {
     });
   }
   onLogin() {
-    if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      console.log({ username, password });
-      this.authService.login(username, password).subscribe({
-        next: (response) => {
-          const token = response.headers.get('Authorization')?.replace('Bearer ', '');
-          const userData = response.body;
-          this.authService.saveToken(token || '');
-          this.authService.saveUserData(userData.usuario);
-          this.route.navigate(['/']);
-          this.authService.saveUserData(userData.usuario);
-        },
-        error: (error) => {
-          console.error('Error during login:', error);
-          alert('Login failed. Please check your credentials.');
-        },
-      });
-    }
+  if (this.loginForm.valid) {
+    const { username, password } = this.loginForm.value;
+    this.authService.login(username, password).subscribe({
+      next: (response) => {
+        const token = response.body.token;
+        const userData = {
+          nombre: response.body.nombre,
+          rol: response.body.rol,
+        }
+        console.log('Token recibido:', token);
+        console.log('Usuario:', userData);
+        console.log('Rol:', userData.rol);
+
+        this.authService.saveToken(token || '');
+        this.authService.saveUserData(userData);
+        Swal.fire({
+          title: '¡Bienvenido!',
+          text: `Has iniciado sesión correctamente.`,
+          icon: 'success',})
+        this.route.navigate(['/']);
+      },
+      error: (error) => {
+        console.error('Error during login:', error);
+        alert('Login failed. Please check your credentials.');
+      },
+    });
   }
+}
+
 }

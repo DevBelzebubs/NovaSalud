@@ -7,9 +7,15 @@ import { BehaviorSubject, tap } from 'rxjs';
 })
 export class AuthService {
   private url = 'http://localhost:8080';
+
   private currentUserSubject = new BehaviorSubject<string | null>(null);
+
   public currentUser$ = this.currentUserSubject.asObservable();
-  constructor(private httpClient:HttpClient){}
+
+  constructor(private httpClient:HttpClient){
+    this.loadUserData();
+  }
+
   login(username:string,password:string){
     const body = {
       nombreUsua: username,
@@ -26,12 +32,12 @@ export class AuthService {
   saveToken(token:string){
     localStorage.setItem('jwt_token',token);
   }
-  saveUserData(user: string) {
+  saveUserData(user: any) {
     localStorage.setItem('usuario', JSON.stringify(user));
     this.currentUserSubject.next(user);
   }
   getUserData() {
-    const data = localStorage.getItem('user_data');
+    const data = localStorage.getItem('usuario');
     return data ? JSON.parse(data) : null;
   }
   loadUserData() {
@@ -47,8 +53,10 @@ export class AuthService {
     localStorage.removeItem('jwt_token');
     localStorage.removeItem('usuario');
     this.currentUserSubject.next(null);
+    window.location.href = '/';
   }
   isLoggedIn(): boolean{
-    return !!this.getToken();
+    const token = this.getToken();
+    return token != null && token.length > 0;
   }
 }

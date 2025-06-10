@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class RegDoctorComponent {
     doctorForm!:FormGroup;
-    especialidades:speciality[] = []
+    especialidades:speciality[] = [];
     constructor(private fb:FormBuilder,private doctorService:DoctorServiceService,private specialityService:SpecialityServiceService,private route:Router){}
     ngOnInit(){
       this.doctorForm = this.fb.group({
@@ -66,6 +66,6 @@ export class RegDoctorComponent {
       }
     }
     exit(){
-      this.route.navigate(['']);
+      this.route.navigate(['/admin']);
     }
 }

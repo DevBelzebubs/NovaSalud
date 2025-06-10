@@ -44,6 +44,8 @@
     padding: 1.5rem;
     border-radius: 16px;
     box-shadow: 0 4px 16px rgba(0, 60, 120, 0.1);
+    width: 80%;
+    margin: 0 auto;
 }
 
 .specialitiesTable table {
@@ -58,6 +60,7 @@
     font-size: 1.3rem;
     text-align: left;
     border-radius: 8px 8px 0 0;
+    text-align: center;
 }
 
 .specialitiesTable td {
@@ -67,8 +70,26 @@
     background-color: #f9fbfd;
     border-bottom: 1px solid #d6e4f0;
     transition: background-color 0.3s;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap:80px
 }
-
+.tableButtons{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+.specialitiesTable td button{
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 4px;
+}
 .specialitiesTable tr:hover td {
     background-color: #e6f2ff;
 }
