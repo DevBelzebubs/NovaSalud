@@ -27,7 +27,7 @@ export class TopBarComponent {
   }
   inicio(){
     this.route.navigate(['/']);
-  }
+  } 
   goTo(path: string){
     const element = document.getElementById(path);
     if (element) {
