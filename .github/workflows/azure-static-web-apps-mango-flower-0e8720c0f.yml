@@ -29,7 +29,10 @@ jobs:
         run: npm install -g @angular/cli
 
       - name: Build Angular app in production
-        run: npm run build
+        run: ng build
+
+      - name: Move build output to correct location
+        run: mv dist/nova-salud/browser/* dist/nova-salud/
 
       - name: Check if index.html exists
         run: |
