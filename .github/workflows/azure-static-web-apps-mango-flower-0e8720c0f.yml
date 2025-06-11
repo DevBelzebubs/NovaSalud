@@ -8,7 +8,6 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
-
 jobs:
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
@@ -26,8 +25,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Angular app
-        run: npm run build
+      - name: Build Angular app in production
+        run: ng build --configuration production
+
+      - name: Check if index.html exists
+        run: |
+          if [ ! -f dist/nova-salud/index.html ]; then 
+            echo "Error: index.html not found in dist/nova-salud";
+            exit 1;
+          fi
 
       - name: Install OIDC Client from Core Package
         run: npm install @actions/core@1.6.0 @actions/http-client
@@ -47,7 +53,7 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_FLOWER_0E8720C0F }}
           action: "upload"
-          app_location: "/" # App source code path
-          api_location: "" # Api source code path - optional
-          output_location: "dist/nova-salud" # Built app content directory - optional
+          app_location: "dist/nova-salud" 
+          api_location: "" 
+          output_location: "dist/nova-salud" 
           github_id_token: ${{ steps.idtoken.outputs.result }}
