@@ -37,13 +37,18 @@ export class LoginComponent {
     const { username, password } = this.loginForm.value;
     this.authService.login(username, password).subscribe({
       next: (response) => {
+
+
+        console.log("IMPRIMIR LOGIN")
+        console.log(response.body.usuario)
+        console.log(response.body)
         const token = response.body.token;
         const userData = {
-          nombre: response.body.nombre,
+          nombre: response.body.usuario,
           rol: response.body.rol,
         }
         console.log('Token recibido:', token);
-        console.log('Usuario:', userData);
+        console.log('Usuario:', response.body.usuario);
         console.log('Rol:', userData.rol);
 
         this.authService.saveToken(token || '');

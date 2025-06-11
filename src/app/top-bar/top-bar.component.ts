@@ -13,11 +13,10 @@ export class TopBarComponent {
   nombre: string = '';
   constructor(private route: Router, private authService:AuthService){}
   ngOnInit() {
-    this.authService.currentUser$.subscribe(user => {
-      if(user){
-        this.username = user;
-      }
-    });
+    const usu = this.authService.getUserData()
+        if(usu){
+      this.username = usu.nombre
+    }
     this.authService.loadUserData();
   }
   login(){
