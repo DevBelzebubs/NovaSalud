@@ -112,6 +112,10 @@
     }
 }
 @media (max-width: 1024px) {
+    .appContainer{
+        width: 106%;
+        margin-left: -5px;
+    }
     .aboutusData {
         gap: 50px;
     }

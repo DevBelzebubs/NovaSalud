@@ -18,7 +18,12 @@
     color: #005a9c;
     margin-bottom: 1rem;
 }
-
+.tableButtons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .userManagement button {
     padding: 0.8rem 1.5rem;
     margin: 0.5rem;
@@ -70,18 +75,18 @@
     background-color: #f9fbfd;
     border-bottom: 1px solid #d6e4f0;
     transition: background-color 0.3s;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    gap:80px
+    text-align: center;
+    vertical-align: middle;
 }
-.tableButtons{
+
+.tableButtons {
     display: flex;
     justify-content: center;
-    gap: 10px;
     align-items: center;
+    gap: 10px;
 }
-.specialitiesTable td button{
+
+.specialitiesTable td button {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 8px;
@@ -90,6 +95,75 @@
     transition: background-color 0.3s, transform 0.2s;
     margin: 4px;
 }
+
 .specialitiesTable tr:hover td {
     background-color: #e6f2ff;
+}
+.addButton {
+    background-color: #0077cc;
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 0 auto;
+}
+.displayForm{
+    margin-top: 20px;
+    background-color: #0077cc;
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.deleteButton {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.formContainer{
+    width: 60%;
+    margin: 0 auto;
+}
+.formSpeciality{
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+}
+.itmSpeciality{
+    display: flex;
+    flex-direction: column;
+}
+.itmSpeciality label{
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.3rem;
+}
+.itmSpeciality input, .itmSpeciality textarea{
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.itmSpeciality input:focus, .itmSpeciality textarea:focus{
+    border-color: #0077cc;
+    box-shadow: 0 0 0 2px rgba(0, 119, 204, 0.2);
+    outline: none;
+}
+.deleteButton:hover{
+    background-color: #c43a3c;
+}
+.addButton:hover{
+    background-color: #025d9e;
 }

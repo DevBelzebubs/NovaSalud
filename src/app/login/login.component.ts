@@ -37,8 +37,6 @@ export class LoginComponent {
     const { username, password } = this.loginForm.value;
     this.authService.login(username, password).subscribe({
       next: (response) => {
-
-
         console.log("IMPRIMIR LOGIN")
         console.log(response.body.usuario)
         console.log(response.body)

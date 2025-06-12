@@ -1,29 +1,59 @@
 <app-top-bar></app-top-bar>
+
 <div class="appContainer">
-    <div class="userManagementContainer">
-        <h2>Gestión de usuarios</h2>    
-        <div class="userManagement">
-            <button class="doctorRegister" (click)="doctorRegister()">Registrar doctor</button>
-            <button class="recepcionistRegister" (click)="recepcionistRegister()">Registrar recepcionista</button>
-        </div>
+  <div class="userManagementContainer">
+    <h2>Gestión de usuarios</h2>
+    <div class="userManagement">
+      <button class="doctorRegister" (click)="doctorRegister()">
+        Registrar doctor
+      </button>
+      <button class="recepcionistRegister" (click)="recepcionistRegister()">
+        Registrar recepcionista
+      </button>
     </div>
-    <div class="specialitiesTableContainer">
-        <div class="specialitiesTable">
-            <table>
-                <tr>
-                    <th>Especialidades</th>
-                </tr>
-                @for (item of specialities; track $index){
-                    <tr>
-                        <td>{{ item.nombre }}
-                            <div class="tableButtons">
-                                 <button class="addButton" (click)="editSpeciality()">Editar</button>
-                                <button class="deleteButton" (click)="deleteSpeciality()">Eliminar</button>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </table>
+  </div>
+
+  <div class="specialitiesTableContainer">
+    <div class="specialitiesTable">
+      <table>
+        <thead>
+          <tr>
+            <th>Especialidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of specialities; track $index) {
+          <tr>
+            <td>{{ item.nombre }}</td>
+            <td>
+              <div class="tableButtons">
+                <button class="deleteButton" (click)="deleteSpeciality(item.id)">X</button>
+              </div>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+      <div>
+        <button class="displayForm" (click)="toggleForm()">+</button>
+      </div>
+      @if (specilityForm){
+        <div class="formContainer">
+          <h1>Añadir especialidades</h1>
+          <form [formGroup]="formSpeciality" class="formSpeciality">
+            <div class="itmSpeciality">
+              <label for="name">Nombre:</label>
+              <input id="name" type="text" placeholder="Nombre..." formControlName="name">
+            </div>
+            <div class="itmSpeciality">
+              <label for="speciality">Descripción</label>
+              <textarea id="speciality" placeholder="Descripción..." formControlName="speciality"></textarea>
+            </div>
+            <button class="addButton" (click)="addSpeciality()">Añadir</button>
+          </form>
         </div>
+      }
     </div>
+  </div>
 </div>
