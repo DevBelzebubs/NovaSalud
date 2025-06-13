@@ -5,6 +5,7 @@ import { SpecialityServiceService } from '../speciality-service.service';
 import { Form, FormBuilder,FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { speciality } from '../../models/speciality';
 import { errorContext } from 'rxjs/internal/util/errorContext';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-admin-main',
@@ -16,7 +17,7 @@ export class AdminMainComponent {
   specialities:speciality[] = [];
   specilityForm:boolean = false;
   formSpeciality!:FormGroup
-  constructor(private route:Router, private specialityService:SpecialityServiceService, private fb:FormBuilder){}
+  constructor(private route:Router, private specialityService:SpecialityServiceService, private fb:FormBuilder, private authService:AuthService){}
   doctorRegister(){
     this.route.navigate(['/registrar-doctor']);
   }
@@ -54,6 +55,7 @@ export class AdminMainComponent {
       },
       error: (error) => {
         console.error("Error fetching specialities:", error);
+        console.log(this.authService.getToken());
       }
     })
   }

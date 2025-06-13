@@ -46,12 +46,14 @@ export class RegDoctorComponent {
           formData.numero,
           formData.sexo,
         )
-        const especialidadSeleccionada = new speciality(formData.especialidad);
+        const especialidadSeleccionada = new speciality(undefined,formData.especialidad);
         const newDoctor = new doctor(
           undefined,
-          doctorUser,
-          especialidadSeleccionada,
-          formData.horarioAtencion
+          formData.nombre,
+          formData.apellido,
+          formData.numero,
+          formData.sexo,
+          especialidadSeleccionada.nombre,
         );
         console.log(JSON.stringify(doctorUser));
         this.doctorService.addDoctor(newDoctor).subscribe({

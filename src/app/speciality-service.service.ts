@@ -10,6 +10,7 @@ export class SpecialityServiceService {
   url = 'http://localhost:8080/api/especialidades'
   constructor(private httpClient:HttpClient){}
   listSpeciality(){
+    console.log("Fetching specialities from: " + this.url);
     return this.httpClient.get<speciality[]>(this.url + '/listar');
   }
   addSpeciality(speciality:speciality){

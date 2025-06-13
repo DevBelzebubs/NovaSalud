@@ -3,11 +3,13 @@ import { speciality } from "./speciality";
 import { user } from "./user";
 import { prescription } from "./prescription";
 
-export class doctor{
-    constructor(
-        public id:number | undefined,
-        public usuario:user,
-        public especialidad:speciality, 
-        public horarioAtencion:string) {
-  }
+export class doctor {
+  constructor(
+    public id: number | undefined,
+    public nombre: string,
+    public apellido: string,
+    public numero: string,
+    public sexo: string,
+    public especialidad: string
+  ) {}
 }

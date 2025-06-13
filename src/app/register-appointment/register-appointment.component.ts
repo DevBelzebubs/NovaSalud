@@ -11,6 +11,11 @@ import {
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { speciality } from '../../models/speciality';
+import { SpecialityServiceService } from '../speciality-service.service';
+import { doctor } from '../../models/doctor';
+import { DoctorServiceService } from '../doctor-service.service';
+import { UserServiceService } from '../user-service.service';
+import { user } from '../../models/user';
 @Component({
   selector: 'app-register-appointment',
   imports: [TopBarComponent, ReactiveFormsModule, FormsModule, CommonModule],
@@ -19,7 +24,12 @@ import { speciality } from '../../models/speciality';
 })
 export class RegisterAppointmentComponent {
   appointmentForm!: FormGroup;
-  constructor(private route: Router, private fb: FormBuilder) {}
+  specialities!:speciality[];
+  doctors!:doctor[];
+  constructor(private route: Router, private fb: FormBuilder, 
+    private specialityService:SpecialityServiceService, 
+    private doctorService:DoctorServiceService, 
+    private userService:UserServiceService) {}
   ngOnInit() {
     this.appointmentForm = this.fb.group({
       speciality: ['', Validators.required],
@@ -27,7 +37,29 @@ export class RegisterAppointmentComponent {
       date: ['', Validators.required],
       time: ['', Validators.required],
     });
+    this.listSpeciality();
+    this.listDoctor();
   }
+  listSpeciality(){
+    this.specialityService.listSpeciality().subscribe({
+      next: (data) => {
+        this.specialities = data;
+      },
+      error: (error) => {
+        console.error("Error fetching specialities:", error);
+      }
+    })
+  }
+  listDoctor() {
+  this.doctorService.listDoctors().subscribe({
+    next: (data) => {
+      this.doctors = data;
+    },
+    error: (error) => {
+      console.error("Error fetching doctors:", error);
+    }
+  });
+}
   confirmAppointment() {
     if (this.appointmentForm.valid) {
       Swal.fire({

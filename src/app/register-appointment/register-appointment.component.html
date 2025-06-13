@@ -4,16 +4,18 @@
     <h2>Seleccione especialidad</h2>
     <select class="inputField" formControlName="speciality">
       <option value="" disabled>Seleccione una especialidad</option>
-      <option value="Cardiology">Cardiologia</option>
-      <option value="Dermatology">Dermatologia</option>
+      @for (item of specialities; track $index){
+        <option>{{ item.nombre }}</option>
+      }
     </select>
     <div *ngIf="appointmentForm.get('speciality')?.invalid && appointmentForm.get('speciality')?.touched" class="error">
       La especialidad es obligatoria.
     </div>
     <select class="inputField" formControlName="doctor">
       <option value="" disabled>Seleccione un doctor</option>
-      <option value="Dr. Smith">Dr. Smith</option>
-      <option value="Dr. Johnson">Dr. Johnson</option>
+      @for (item of doctors; track $index){
+        <option> Dr. {{item.nombre}} {{item.apellido}}</option>
+      }
     </select>
     <div *ngIf="appointmentForm.get('doctor')?.invalid && appointmentForm.get('doctor')?.touched" class="error">
       El doctor es obligatorio.

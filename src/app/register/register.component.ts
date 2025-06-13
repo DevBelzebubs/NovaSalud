@@ -22,12 +22,11 @@ export class RegisterComponent {
   usuariosRegistrados: (user | patient | doctor)[] = [];
   ngOnInit(){
     this.registerForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       dni: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]],
       numero: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       sexo: ['', Validators.required]
     });
   }
