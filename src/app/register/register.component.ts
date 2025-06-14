@@ -31,7 +31,6 @@ export class RegisterComponent {
     });
   }
   onRegister() {
-  if (this.registerForm.valid) {
     const formData = this.registerForm.value;
     const patientUser = new user(
       undefined,
@@ -41,7 +40,6 @@ export class RegisterComponent {
       formData.apellido,
       formData.numero,
       formData.sexo,
-      { nombreRol: 'ROL_PACIENTE' }
     );
 
     const newPatient = new patient(
@@ -49,19 +47,16 @@ export class RegisterComponent {
       formData.dni,
       patientUser
     );
-    console.log('Datos del paciente a enviar:', JSON.stringify(newPatient));
     this.patientService.addPatient(newPatient).subscribe({
       next: (registeredPatient) => {
-        console.log(registeredPatient);
-        //this.usuariosRegistrados.push(registeredPatient);
+        console.log('Paciente registrado correctamente', registeredPatient);
         this.registerForm.reset();
       },
       error: (err) => {
-        console.error(err);
+        console.error('Error al registrar paciente:', err);
       }
     });
-  }
-}
+ }
 
 
 }

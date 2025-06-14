@@ -34,40 +34,34 @@ export class RegDoctorComponent {
           this.especialidades = data;
         })
     }
-    onRegister(){
-      if(this.doctorForm.valid){
-        const formData = this.doctorForm.value;
-        const doctorUser = new user(
-          undefined,
-          formData.nombreUsuario,
-          formData.password,
-          formData.nombre,
-          formData.apellido,
-          formData.numero,
-          formData.sexo,
-        )
-        const especialidadSeleccionada = new speciality(undefined,formData.especialidad);
-        const newDoctor = new doctor(
-          undefined,
-          formData.nombre,
-          formData.apellido,
-          formData.numero,
-          formData.sexo,
-          especialidadSeleccionada.nombre,
-        );
-        console.log(JSON.stringify(doctorUser));
-        this.doctorService.addDoctor(newDoctor).subscribe({
-          next: () =>{
-            console.log("Doctor registrado con éxito")
-          },
-          error: (err) =>{
-            console.log("Error: " + err); 
-            console.log(JSON.stringify(doctorUser));
-          }
-        })
+    onRegister() {
+    const formData = this.doctorForm.value;
+    const doctorUser = new user(
+      undefined,
+      formData.nombreUsuario,
+      formData.password,
+      formData.nombre,
+      formData.apellido,
+      formData.numero,
+      formData.sexo,
+    )
+    const especialidadSeleccionada = new speciality(formData.especialidad);
+    const newDoctor = new doctor(
+      undefined,
+      doctorUser,
+      especialidadSeleccionada
+    );
+    console.log(JSON.stringify(newDoctor));
+    this.doctorService.addDoctor(newDoctor).subscribe({
+      next: () => {
+        console.log("Doctor registrado con éxito")
+      },
+      error: (err) => {
+        console.log("Error: ", err);
       }
-    }
-    exit(){
-      this.route.navigate(['/admin']);
-    }
+    })
+  }
+  exit() {
+    this.route.navigate(['/admin']);
+  }
 }
