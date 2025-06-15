@@ -14,7 +14,7 @@
     <select class="inputField" formControlName="doctor">
       <option value="" disabled selected>Seleccione un doctor</option>
       @for (item of filteredDoctors; track $index){
-        <option [value]="item.id"> Dr. {{item.usuario}}</option>
+        <option [value]="item.id"> Dr. {{item.nombre}} {{item.apellido}}</option>
       }
     </select>
     <div *ngIf="appointmentForm.get('doctor')?.invalid && appointmentForm.get('doctor')?.touched" class="error">

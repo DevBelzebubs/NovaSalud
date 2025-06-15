@@ -6,6 +6,7 @@ import { Form, FormBuilder,FormGroup, FormsModule, ReactiveFormsModule, Validato
 import { speciality } from '../../models/speciality';
 import { errorContext } from 'rxjs/internal/util/errorContext';
 import { AuthService } from '../auth.service';
+import {} from 'sweetalert2'
 
 @Component({
   selector: 'app-admin-main',
@@ -39,6 +40,7 @@ export class AdminMainComponent {
     this.specialityService.deleteSpeciality(id).subscribe({
       next: (data)=>{
         this.listSpeciality()
+
       },
       error: (err)=>{
         this.listSpeciality();

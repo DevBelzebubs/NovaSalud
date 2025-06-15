@@ -31,8 +31,6 @@
                 <option *ngFor="let esp of especialidades" [value]="esp.id">{{ esp.nombre }}</option>
             </select><br><br>
 
-            <label for="horarioAtencion">Horario de Atención:</label>
-            <input id="horarioAtencion" formControlName="horarioAtencion" type="time" /><br><br>
             <button type="submit" [disabled]="doctorForm.invalid">Guardar Doctor</button>
 </form>
     </div>

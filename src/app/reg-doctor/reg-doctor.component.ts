@@ -8,6 +8,7 @@ import { user } from '../../models/user';
 import { speciality } from '../../models/speciality';
 import { SpecialityServiceService } from '../speciality-service.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-reg-doctor',
   imports: [ReactiveFormsModule,CommonModule],
@@ -27,7 +28,6 @@ export class RegDoctorComponent {
           numero:['',Validators.required],
           sexo:['',Validators.required],
           especialidad:['',Validators.required],
-          horarioAtencion:['',Validators.required]
           
       })
       this.specialityService.listSpeciality().subscribe(data =>{
@@ -55,6 +55,12 @@ export class RegDoctorComponent {
     this.doctorService.addDoctor(newDoctor).subscribe({
       next: () => {
         console.log("Doctor registrado con éxito")
+        Swal.fire({
+          title: 'Doctor registrado con éxito',
+          text: 'El doctor ha sido registrado con éxito',
+          icon: 'success',
+        });
+        this.route.navigate(['/']);
       },
       error: (err) => {
         console.log("Error: ", err);

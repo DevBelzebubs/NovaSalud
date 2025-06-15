@@ -16,6 +16,7 @@ import { doctor } from '../../models/doctor';
 import { DoctorServiceService } from '../doctor-service.service';
 import { UserServiceService } from '../user-service.service';
 import { user } from '../../models/user';
+import { DoctorDto } from '../interfaces/doctorDto';
 @Component({
   selector: 'app-register-appointment',
   imports: [TopBarComponent, ReactiveFormsModule, FormsModule, CommonModule],
@@ -25,11 +26,12 @@ import { user } from '../../models/user';
 export class RegisterAppointmentComponent {
   appointmentForm!: FormGroup;
   specialities!:speciality[];
-  doctors:doctor[] = [];
-  filteredDoctors: doctor[] = [];
+  doctors:DoctorDto[] = [];
+  filteredDoctors: DoctorDto[] = [];
   constructor(private route: Router, private fb: FormBuilder, 
     private specialityService:SpecialityServiceService, 
     private doctorService:DoctorServiceService) {}
+    
   ngOnInit() {
     this.appointmentForm = this.fb.group({
       speciality: ['', Validators.required],
@@ -41,10 +43,10 @@ export class RegisterAppointmentComponent {
     this.listDoctor();
     this.appointmentForm.get('speciality')?.valueChanges.subscribe(specialityId => {
       console.log(specialityId);
-      this.filterDoctorsBySpeciality(+specialityId);
+      this.filterDoctorsBySpeciality(specialityId);
       this.appointmentForm.get('doctor')?.setValue('');
       this.doctors.forEach(doc => {
-        console.log("Doctor:", doc.usuario, "- Especialidad ID:", doc.especialidad);
+        console.log(doc);
       });
     });
   }
@@ -63,7 +65,6 @@ export class RegisterAppointmentComponent {
   listDoctor() {
     this.doctorService.listDoctors().subscribe({
       next: (data) => {
-        console.log(data);
         this.doctors = data;
       },
       error: (error) => {
@@ -71,12 +72,16 @@ export class RegisterAppointmentComponent {
       }
     });
   }
+
   filterDoctorsBySpeciality(specialityId: number) {
-    console.log(this.doctors);
-    this.filteredDoctors = this.doctors.filter(doc => doc.especialidad?.id === specialityId);
-    console.log(this.filteredDoctors);
-    console.log(this.doctors);
+    const especialidadSeleccionada = this.specialities.find(e => e.id === +specialityId)?.nombre;
+    if (!especialidadSeleccionada) {
+      this.filteredDoctors = [];
+      return;
+    }
+    this.filteredDoctors = this.doctors.filter(doc => doc.especialidad === especialidadSeleccionada);
   }
+
   confirmAppointment() {
     if (this.appointmentForm.valid) {
       Swal.fire({

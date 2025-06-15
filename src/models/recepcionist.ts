@@ -1,10 +1,10 @@
 import { user } from "./user";
 
-export class receptionist{
-    id!:number;
-    private user!:user;
-    constructor(id:number,user:user){
+export class recepcionist{
+    id:number | undefined;
+    usuario!:user;
+    constructor(id:number | undefined,usuario:user){
         this.id=id;
-        this.user=user;
+        this.usuario=usuario;
     }
 }
