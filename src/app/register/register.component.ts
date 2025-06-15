@@ -9,7 +9,8 @@ import { PatientServiceService } from '../patient-service.service';
 import { UserServiceService } from '../user-service.service';
 import { switchMap } from 'rxjs';
 import { Role } from '../../models/role';
-
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   imports: [TopBarComponent,ReactiveFormsModule,FormsModule,CommonModule],
@@ -18,7 +19,7 @@ import { Role } from '../../models/role';
 })
 export class RegisterComponent {
   registerForm!:FormGroup;
-  constructor(private fb:FormBuilder,private patientService:PatientServiceService) {}
+  constructor(private fb:FormBuilder,private patientService:PatientServiceService,private route: Router) {}
   usuariosRegistrados: (user | patient | doctor)[] = [];
   ngOnInit(){
     this.registerForm = this.fb.group({
@@ -50,7 +51,13 @@ export class RegisterComponent {
     this.patientService.addPatient(newPatient).subscribe({
       next: (registeredPatient) => {
         console.log('Paciente registrado correctamente', registeredPatient);
+        Swal.fire({
+          title: '¡Registro exitoso!',
+          text: 'El paciente ha sido registrado correctamente.',
+          icon: 'success',
+        });
         this.registerForm.reset();
+        this.route.navigate(['']);
       },
       error: (err) => {
         console.error('Error al registrar paciente:', err);

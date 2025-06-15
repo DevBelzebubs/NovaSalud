@@ -5,16 +5,16 @@
     <select class="inputField" formControlName="speciality">
       <option value="" disabled>Seleccione una especialidad</option>
       @for (item of specialities; track $index){
-        <option>{{ item.nombre }}</option>
+        <option [value]="item.id">{{ item.nombre }}</option>
       }
     </select>
     <div *ngIf="appointmentForm.get('speciality')?.invalid && appointmentForm.get('speciality')?.touched" class="error">
       La especialidad es obligatoria.
     </div>
     <select class="inputField" formControlName="doctor">
-      <option value="" disabled>Seleccione un doctor</option>
-      @for (item of doctors; track $index){
-        <option> Dr. {{item.nombre}} {{item.apellido}}</option>
+      <option value="" disabled selected>Seleccione un doctor</option>
+      @for (item of filteredDoctors; track $index){
+        <option [value]="item.id"> Dr. {{item.usuario}}</option>
       }
     </select>
     <div *ngIf="appointmentForm.get('doctor')?.invalid && appointmentForm.get('doctor')?.touched" class="error">
