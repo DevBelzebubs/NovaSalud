@@ -40,6 +40,7 @@ export class LoginComponent {
         console.log("IMPRIMIR LOGIN")
         console.log(response.body.usuario)
         console.log(response.body)
+        const rol = response.body.rol;
         const token = response.body.token;
         const userData = {
           nombre: response.body.usuario,
@@ -55,7 +56,13 @@ export class LoginComponent {
           title: '¡Bienvenido!',
           text: `Has iniciado sesión correctamente.`,
           icon: 'success',})
-        this.route.navigate(['/']);
+        if (rol === 'ROL_ADMIN') {
+          this.route.navigate(['/admin']);
+        } else if (rol === 'ROL_RECEPCIONISTA') {
+          this.route.navigate(['/recepcion']);
+        } else {
+          this.route.navigate(['/']);
+        }
       },
       error: (error) => {
         console.error('Error during login:', error);

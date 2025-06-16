@@ -60,7 +60,7 @@ export class RegDoctorComponent {
           text: 'El doctor ha sido registrado con éxito',
           icon: 'success',
         });
-        this.route.navigate(['/']);
+        this.route.navigate(['/admin']);
       },
       error: (err) => {
         console.log("Error: ", err);
