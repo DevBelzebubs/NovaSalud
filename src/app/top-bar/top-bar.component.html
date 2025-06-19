@@ -1,42 +1,25 @@
 <nav class="appContainer">
-  @if(!username){
-  <div class="enterUser">
-    <div class="loginContainer">
-      <img src="assets/img/login.png" alt="User" width="25px" />
-      <span class="loginText" (click)="login()">Iniciar Sesión</span>
-    </div>
-    <div class="registerContainer">
-      <img src="assets/img/register.png" alt="User" width="25px" />
-      <span class="registerText" (click)="register()">Registrarse</span>
-    </div>
-  </div>
-  } @if (username){
-  <div class="enterUser">
-    <img src="assets/img/login.png" alt="User" width="25px" />
-    <span class="loginText">Bienvenido, {{ username }}</span>
-    <span class="registerText" (click)="logout()">Cerrar sesión</span>
-  </div>
-  }
-  <div class="topContainer">
-    <img src="assets/img/logo.png" alt="Logo" width="244px" />
-    <div class="itemContainer">
-      <div class="numberContainer">
-        <img src="assets/img/phone.png" alt="Phone" width="30px" />
-        <label>Numero de contacto:</label>
-        <span class="phoneNumber">+51 952 014 938</span>
+  <div class="topMain">
+    <div class="topContainer">
+      <img src="assets/img/logo.png" alt="Logo" class="logo"/>
+      @if(!username){
+      <div class="enterUser">
+        <div class="loginContainer">
+          <img src="assets/img/login.png" alt="User" width="25px" />
+          <span class="loginText" (click)="login()">Iniciar Sesión</span>
+        </div>
+        <div class="registerContainer">
+          <img src="assets/img/register.png" alt="User" width="25px" />
+          <span class="registerText" (click)="register()">Registrarse</span>
+        </div>
       </div>
-      <div class="emailContainer">
-        <img src="assets/img/email.png" alt="Email" width="30px" />
-        <label>Correo:</label>
-        <span class="email">novasalud&#64;email.com</span>
+    } @if (username){
+      <div class="enterUser">
+        <img src="assets/img/login.png" alt="User" width="25px" />
+        <span class="loginText">Bienvenido, {{ username }}</span>
+        <span class="registerText" (click)="logout()">Cerrar sesión</span>
       </div>
-      <div class="openingHours">
-        <img src="assets/img/clock.png" alt="Clock" width="30px" />
-        <label>Horario:</label>
-        <span class="openingHoursText"
-          >Lunes-Viernes: <br />8:00 AM - 11:00 PM</span
-        >
-      </div>
+    }
     </div>
   </div>
   <div class="bottomContainer">

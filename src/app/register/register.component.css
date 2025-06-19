@@ -26,6 +26,9 @@
   align-items: center;
   width: 40%;
 }
+.topTextContainer{
+  width: 50%;
+}
 .title{
   font-size: 32px;
   margin-right: 450px;
@@ -33,8 +36,9 @@
 }
 .subtitle{
   font-size: 22px;
-  margin-right: 347px;
   margin-top: 15px;
+  margin-left: -80px;
+  width: 220%;
 }
 .topText{
   display: flex;
@@ -91,4 +95,34 @@
   display: flex;
   flex-direction:row;
   width: 210%;
+}
+@media (max-width:1000px){
+  .appContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100.5%;
+  }
+  .imgBackground{
+    width: 103%;
+  }
+  .formsContainer{
+    width: 100%;
+  }
+  .topTextContainer ,.rolForm label{
+    width: 100%;
+  }
+}
+@media (max-width:515px){
+  .formContainer .rolForm select{
+    width: 330%;
+  }
+  .formContainer input{
+    width: 310%;
+  }
+  .formTopMiddle{
+    width: 360%;
+  }
+  .rolForm label{
+    width: 200%;
+  }
 }

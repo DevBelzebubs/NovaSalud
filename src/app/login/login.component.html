@@ -4,9 +4,11 @@
   <div class="formsContainer">
     <div class="userForm">
       <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="form1">
-        <div class="topText">
-          <span class="title">¡Bienvenido!</span>
-          <span class="subtitle">Por favor acceda a su cuenta</span>
+        <div class="topTextContainer">
+          <div class="topText">
+            <span class="title">¡Bienvenido!</span>
+            <span class="subtitle">Por favor acceda a su cuenta</span>
+          </div>
         </div>
         <span class="titulouserForm">Iniciar sesión</span>
         <div *ngIf="loginForm.get('rol')?.invalid && loginForm.get('rol')?.touched" class="error">

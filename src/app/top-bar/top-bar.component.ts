@@ -33,6 +33,9 @@ export class TopBarComponent {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    if(this.route.navigated){
+      
+    }
   }
   logout(){
     this.authService.logout();
