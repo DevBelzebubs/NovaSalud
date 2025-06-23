@@ -1,0 +1,61 @@
+<nav class="appContainer">
+  <div class="topMain">
+    <div class="topContainer">
+      <img src="assets/img/logo.png" alt="Logo" class="logo"/>
+      @if(!username){
+      <div class="enterUser">
+        <div class="loginContainer">
+          <img src="assets/img/login.png" alt="User" width="25px" />
+          <span class="loginText" (click)="login()">Iniciar Sesión</span>
+        </div>
+        <div class="registerContainer">
+          <img src="assets/img/register.png" alt="User" width="25px" />
+          <span class="registerText" (click)="register()">Registrarse</span>
+        </div>
+      </div>
+    } @if (username){
+      <div class="enterUser">
+        <img src="assets/img/login.png" alt="User" width="25px" />
+        <span class="loginText">Bienvenido, {{ username }}</span>
+        <span class="registerText" (click)="logout()">Cerrar sesión</span>
+      </div>
+    }
+    </div>
+  </div>
+  <div class="bottomContainer">
+    <div class="optionsContainer">
+      <div class="optionsRedirect">
+        <span class="optionItem" style="font-size: 150%" (click)="inicio()"
+          >Inicio</span
+        >
+        <span
+          class="optionItem"
+          style="font-size: 150%"
+          (click)="goTo('about-us')"
+          >Acerca de Nosotros</span
+        >
+        <span
+          class="optionItem"
+          style="font-size: 150%"
+          (click)="goTo('specialities')"
+          >Especialidades</span
+        >
+      </div>
+      <div class="optionsRedirect">
+        <span
+          class="optionItem"
+          style="font-size: 150%"
+          (click)="registrarCita()"
+          >Registrar cita</span
+        >
+        <span
+          class="optionItem"
+          style="font-size: 150%"
+          (click)="historialMedico()"
+          >Historial de citas</span
+        >
+      </div>
+      <span class="optionItem" style="font-size: 150%"></span>
+    </div>
+  </div>
+</nav>

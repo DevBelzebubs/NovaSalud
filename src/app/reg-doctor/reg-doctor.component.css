@@ -1,0 +1,78 @@
+.appContainer {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f4f9ff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 60, 120, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.appContainer h1 {
+    text-align: center;
+    color: #005a9c;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.formDoctorContainer form {
+    display: flex;
+    flex-direction: column;
+}
+.formDoctorContainer label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.3rem;
+}
+
+.formDoctorContainer input,
+.formDoctorContainer select {
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.formDoctorContainer input:focus,
+.formDoctorContainer select:focus {
+    border-color: #0077cc;
+    box-shadow: 0 0 0 2px rgba(0, 119, 204, 0.2);
+    outline: none;
+}
+
+.formDoctorContainer input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+.formDoctorContainer button[type="submit"] {
+    margin-top: 1rem;
+    background-color: #0077cc;
+    color: white;
+    padding: 0.9rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.formDoctorContainer button[type="submit"]:hover:not(:disabled) {
+    background-color: #005fa3;
+    transform: scale(1.02);
+}
+
+.formDoctorContainer button[type="submit"]:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+.exitBtn{
+    background-color: #ff4d4d;
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}

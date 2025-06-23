@@ -1,0 +1,41 @@
+.appContainer{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.appTitle{
+    font-size: 24px;
+}
+.appTitle span{
+    color: rgb(3, 78, 162);
+}
+.textTop{
+    width: 60%;
+    margin: auto;
+}
+.specialitiesData{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap:wrap;
+    margin-top: 40px;
+}
+.specialitiesDataItem{
+    margin: 5px;
+}
+.specialitiesData p{
+    width: 60%;
+    margin: auto;
+}
+.item{
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+.item.show{
+    opacity: 1;
+    transform: translateY(0);
+}

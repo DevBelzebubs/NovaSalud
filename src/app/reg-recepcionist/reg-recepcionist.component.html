@@ -1,0 +1,33 @@
+<div class="appContainer">
+    <button class="exitBtn" (click)="exit()">Salir</button>
+    <h1>Registrar recepcionista</h1>
+    <div class="formReceptionistContainer">
+        <form [formGroup]="receptionistForm" (ngSubmit)="onRegister()">
+            <label for="nombreUsuario">Nombre de usuario:</label>
+            <input id="nombreUsuario" formControlName="nombreUsuario" type="text" /><br><br>
+
+            <label for="nombre">Nombre:</label>
+            <input id="nombre" formControlName="nombre" type="text" /><br><br>
+
+            <label for="apellido">Apellido:</label>
+            <input id="apellido" formControlName="apellido" type="text" /><br><br>
+
+            <label for="numero">Número:</label>
+            <input id="numero" formControlName="numero" type="text" /><br><br>
+
+            <label for="password">Contraseña:</label>
+            <input id="password" formControlName="password" type="password" /><br><br>
+
+            <label>Sexo:</label><br>
+            <label>
+                <input type="radio" formControlName="sexo" value="M"> Masculino
+                </label><br>
+            <label>
+                <input type="radio" formControlName="sexo" value="F"> Femenino
+            </label><br><br>
+
+            <button type="submit" [disabled]="receptionistForm.invalid">Guardar Recepcionista</button>
+        </form>
+
+    </div>
+</div>

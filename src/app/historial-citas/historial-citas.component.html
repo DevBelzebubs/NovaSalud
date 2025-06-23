@@ -1,0 +1,19 @@
+<app-top-bar></app-top-bar>
+<div class="appContainer">
+    <h1>Citas médicas</h1>
+    <div class="citasMain">
+        <div class="citasContainer">
+            @for (item of citas; track $index){
+                <div class="citasItem">
+                    <h2>Id: {{item.id}}</h2>
+                    <h2>{{item.dateAppointment}} + {{item.timeAppointment}}</h2>
+                    <div class="doctorContainer">
+                    </div>
+                    <div class="prescripctionContainer">
+                        <h2></h2>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

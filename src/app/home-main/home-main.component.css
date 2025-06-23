@@ -1,0 +1,73 @@
+.appComponent{
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    width: 100.95%;
+    margin-left: -10px;
+}
+.imgWrapper{
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: fit-content;
+}
+.imgItem{
+    width: 100vw;
+    height: 80vh;
+    object-fit: cover;
+    flex-shrink: 0;
+    filter: brightness(0.6);
+}
+.wrapperText{
+    color: white;
+    width: 600px;
+    position: absolute;
+    top: 400px;
+    left: 250px;
+    font-size: 25px;
+}
+@media (max-width: 1024px) {
+    .wrapperText{
+        margin-top: 200px;
+    }
+    .imgItem{
+        width: 1700px;
+    }
+}
+@media (max-width: 841px) {
+    .appComponent{
+        margin-left: -9px;
+        width: 107.8%;
+    }
+    .wrapperText{
+        margin-left: -90px;
+        width: 90%;
+        font-size: large;
+    }
+    .imgItem{
+        width: 1500px;
+    }
+}
+@media (max-width: 768px) {
+    .wrapperText{
+        margin-top: 500px;
+        margin-left: -150px;
+        }
+    }
+    @media (max-width: 700px) {
+        .wrapperText{
+            margin-top: 500px;
+            margin-left: -180px;
+        }
+        .imgItem{
+            width: 800px;
+        }
+    }
+    @media (max-width: 660px) {
+        .wrapperText{
+            margin-top: 500px;
+            margin-left: -230px;
+        }
+        .imgItem{
+            width: 600px;
+        }
+        
+    }

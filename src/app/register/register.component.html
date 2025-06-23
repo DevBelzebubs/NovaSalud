@@ -1,0 +1,44 @@
+<app-top-bar></app-top-bar>
+<div class="appContainer">
+  <img src="assets/img/login-background.png" class="imgBackground" />
+  <div class="formsContainer">
+    <div class="userForm">
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="form1">
+        <div class="topTextContainer">
+          <div class="topText">
+            <span class="title">¡Bienvenido!</span>
+            <span class="subtitle">Por favor acceda a su cuenta</span>
+          </div>
+        </div>
+        <span class="titulouserForm">Registrarse</span>
+        <div class="formContainer">
+          <div class="formTopMiddle">
+            <input type="text" placeholder="Nombre..." formControlName="nombre"/>
+            <input type="text" placeholder="Apellido..." formControlName="apellido"/>
+          </div>
+          <div class="formMiddle">
+            <input type="text" placeholder="DNI..." formControlName="dni"/><br/>
+            <input type="text" placeholder="Número..." formControlName="numero"/><br/>
+          </div>
+          <div class="formMiddleBottom">
+            <input type="password" placeholder="Contraseña..." formControlName="password"/><br/>
+          </div>
+        </div>
+        <div class="formBottom">
+          <div class="checkboxGroup">
+            <input type="radio" id="chk_Men" value="M" formControlName="sexo" />
+            <label for="chk_Men">M</label>
+          </div>
+          <div class="checkboxGroup">
+            <input type="radio" id="chk_Women" value="F" formControlName="sexo"/>
+            <label for="chk_Women">F</label>
+          </div>
+        </div>
+        <button type="submit">Ingresar</button>
+      </form>
+      <div class="formSeccion1">
+        <p>¿Ya tienes cuenta?<span class="reg">Logeate</span></p>
+      </div>
+    </div>
+  </div>
+</div>

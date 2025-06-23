@@ -1,0 +1,34 @@
+<div class="appContainer">
+    <div class="step">
+    <h2>Selecciona un método de pago</h2>
+    <select class="inputField" [(ngModel)]="selectedMethod" (change)="onMethodChange()">
+      <option value="">-- Elige una opción --</option>
+      <option value="card">Tarjeta de crédito/débito</option>
+      <option value="yape">Yape</option>
+      <option value="mercadoPago">Mercado Pago</option>
+    </select>
+  </div>
+
+  <div class="step" *ngIf="selectedMethod === 'card'">
+    <h2>Datos de tarjeta</h2>
+    <input type="text" placeholder="Nombre del titular" class="inputField">
+    <input type="text" placeholder="Número de tarjeta" class="inputField">
+    <input type="text" placeholder="Fecha de expiración (MM/AA)" class="inputField">
+    <input type="text" placeholder="CVV" class="inputField">
+    <button class="primaryButton" (click)="onConfirmPayment()">Pagar</button>
+  </div>
+
+  <div class="step" *ngIf="selectedMethod === 'yape'">
+    <h2>Paga con Yape</h2>
+    <p>Escanea este código QR o paga al número <strong>960 662 079</strong></p>
+    <div class="qrCode">
+        <img src="assets/img/yape-qr.png" alt="QR Yape" width="200">
+        <button class="primaryButton" (click)="onConfirmPayment()">Confirmar pago</button>
+    </div>
+  </div>
+
+  <div class="step" *ngIf="selectedMethod === 'mercadoPago'">
+    <h2>Pagar con Mercado Pago</h2>
+    <div id="wallet_container"></div>
+  </div>
+</div>
