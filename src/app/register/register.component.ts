@@ -32,38 +32,33 @@ export class RegisterComponent {
     });
   }
   onRegister() {
-    const formData = this.registerForm.value;
-    const patientUser = new user(
-      undefined,
-      undefined,
-      formData.password,
-      formData.nombre,
-      formData.apellido,
-      formData.numero,
-      formData.sexo,
-    );
+  const formData = this.registerForm.value;
 
-    const newPatient = new patient(
-      undefined,
-      formData.dni,
-      patientUser
-    );
-    this.patientService.addPatient(newPatient).subscribe({
-      next: (registeredPatient) => {
-        console.log('Paciente registrado correctamente', registeredPatient);
-        Swal.fire({
-          title: '¡Registro exitoso!',
-          text: 'El paciente ha sido registrado correctamente.',
-          icon: 'success',
-        });
-        this.registerForm.reset();
-        this.route.navigate(['']);
-      },
-      error: (err) => {
-        console.error('Error al registrar paciente:', err);
-      }
-    });
- }
+  const newPatient = new patient(
+    undefined,
+    formData.dni,
+    formData.nombre,
+    formData.apellido,
+    formData.password,
+    formData.numero,
+    formData.sexo
+  );
 
+  this.patientService.addPatient(newPatient).subscribe({
+    next: (registeredPatient) => {
+      console.log('Paciente registrado correctamente', registeredPatient);
+      Swal.fire({
+        title: '¡Registro exitoso!',
+        text: 'El paciente ha sido registrado correctamente.',
+        icon: 'success',
+      });
+      this.registerForm.reset();
+      this.route.navigate(['']);
+    },
+    error: (err) => {
+      console.error('Error al registrar paciente:', err);
+    }
+  });
+}
 
 }

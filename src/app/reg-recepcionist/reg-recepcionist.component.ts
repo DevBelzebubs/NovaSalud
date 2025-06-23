@@ -28,27 +28,26 @@ export class RegRecepcionistComponent {
     })
   }
   onRegister() {
-    const formData = this.receptionistForm.value;
+  const formData = this.receptionistForm.value;
 
-    const usuario = new user(
-      undefined,
-      formData.nombreUsuario,
-      formData.password,
-      formData.nombre,
-      formData.apellido,
-      formData.numero,
-      formData.sexo
-    );
-    const newReceptionist = new recepcionist(undefined, usuario);
+  const newReceptionist = new recepcionist(
+    undefined,
+    formData.nombreUsuario,
+    formData.nombre,
+    formData.apellido,
+    formData.password,
+    formData.numero,
+    formData.sexo
+  );
+  this.recepcionistService.addReceptionist(newReceptionist).subscribe({
+    next: () => {
+      console.log("Recepcionista registrado con éxito");
+      this.route.navigate(['/admin']);
+    },
+    error: (err) => {
+      console.error("Error al registrar recepcionista:", err);
+    }
+  });
+}
 
-    this.recepcionistService.addReceptionist(newReceptionist).subscribe({
-      next: () => {
-        console.log("Recepcionista registrado con éxito");
-        this.route.navigate(['/admin']);
-      },
-      error: (err) => {
-        console.error("Error al registrar recepcionista:", err);
-      }
-    });
-  }
 }

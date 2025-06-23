@@ -1,10 +1,13 @@
 import { user } from "./user";
 
-export class recepcionist{
-    id:number | undefined;
-    usuario!:user;
-    constructor(id:number | undefined,usuario:user){
-        this.id=id;
-        this.usuario=usuario;
-    }
+export class recepcionist {
+  constructor(
+    public id: number | undefined,
+    public username: string,
+    public nombre: string,
+    public apellido: string,
+    public contrasena: string,
+    public numero: string,
+    public sexo: string
+  ) {}
 }

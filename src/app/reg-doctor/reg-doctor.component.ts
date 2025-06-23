@@ -28,45 +28,42 @@ export class RegDoctorComponent {
           numero:['',Validators.required],
           sexo:['',Validators.required],
           especialidad:['',Validators.required],
-          
       })
       this.specialityService.listSpeciality().subscribe(data =>{
           this.especialidades = data;
         })
     }
     onRegister() {
-    const formData = this.doctorForm.value;
-    const doctorUser = new user(
-      undefined,
-      formData.nombreUsuario,
-      formData.password,
-      formData.nombre,
-      formData.apellido,
-      formData.numero,
-      formData.sexo,
-    )
-    const especialidadSeleccionada = new speciality(formData.especialidad);
-    const newDoctor = new doctor(
-      undefined,
-      doctorUser,
-      especialidadSeleccionada
-    );
-    console.log(JSON.stringify(newDoctor));
-    this.doctorService.addDoctor(newDoctor).subscribe({
-      next: () => {
-        console.log("Doctor registrado con éxito")
-        Swal.fire({
-          title: 'Doctor registrado con éxito',
-          text: 'El doctor ha sido registrado con éxito',
-          icon: 'success',
-        });
-        this.route.navigate(['/admin']);
-      },
-      error: (err) => {
-        console.log("Error: ", err);
-      }
-    })
-  }
+  const formData = this.doctorForm.value;
+
+  const newDoctor = new doctor(
+    undefined,
+    formData.nombreUsuario,
+    formData.nombre,
+    formData.apellido,
+    formData.password,
+    formData.numero,
+    formData.sexo,
+    formData.especialidad
+  );
+
+  console.log(JSON.stringify(newDoctor));
+  this.doctorService.addDoctor(newDoctor).subscribe({
+    next: () => {
+      console.log("Doctor registrado con éxito");
+      Swal.fire({
+        title: 'Doctor registrado con éxito',
+        text: 'El doctor ha sido registrado con éxito',
+        icon: 'success',
+      });
+      this.route.navigate(['/admin']);
+    },
+    error: (err) => {
+      console.log("Error: ", err);
+    }
+  });
+}
+
   exit() {
     this.route.navigate(['/admin']);
   }
