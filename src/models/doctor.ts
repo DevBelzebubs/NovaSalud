@@ -12,6 +12,6 @@ export class doctor {
     public contrasena: string,
     public numero: string,
     public sexo: string,
-    public especialidad: string // o number si es solo el ID
+    public especialidad: string
   ) {}
 }

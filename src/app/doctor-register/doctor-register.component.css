@@ -1,0 +1,47 @@
+.appContainer{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.goBack{
+    margin-left: 20px;
+    margin-top: 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 50px;
+}
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.scheduleRegister{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40vh;
+    max-width: 600px;
+    height: 10vh;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    gap:20px;
+    margin-top: 100px;
+}
+.scheduleRegister input{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.listscheduleContainer h1{
+    text-align: center;
+    margin-bottom: 20px;
+}

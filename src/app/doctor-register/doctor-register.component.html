@@ -1,1 +1,24 @@
-<p>doctor-register works!</p>
+<div class="appContainer">
+    <h2 class="goBack" (click)="goBack()">Volver</h2>
+    <div class="formContainer">
+        <h1>Registrar horario</h1>
+        <form [formGroup]="doctorRegisterForm" (ngSubmit)="onSubmit()">
+            <div class="scheduleRegister">
+                <input type="date" formControlName="scheduleDate" placeholder="Fecha y hora de la cita" required />
+                <input type="time" formControlName="scheduleTime" placeholder="Hora de la cita" required />
+            </div>
+        </form>
+    </div>
+    <div class="listscheduleContainer">
+        <h1>Horarios registrados</h1>
+        <div class="listSchedule">
+            @for (item of scheduleList; track $index){
+                <div class="scheduleItem">
+                    <span class="scheduleDate">{{ item.scheduleDate | date: 'dd/MM/yyyy' }}</span>
+                    <span class="scheduleTime">{{ item.scheduleTime | date: 'shortTime' }}</span>
+                    <button (click)="deleteSchedule(item.id)">Eliminar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -17,6 +17,8 @@ import { DoctorServiceService } from '../doctor-service.service';
 import { UserServiceService } from '../user-service.service';
 import { user } from '../../models/user';
 import { DoctorDto } from '../interfaces/doctorDto';
+import { AppointmentServiceService } from '../appointment-service.service';
+import { appointment } from '../../models/appointment';
 @Component({
   selector: 'app-register-appointment',
   imports: [TopBarComponent, ReactiveFormsModule, FormsModule, CommonModule],
@@ -30,18 +32,20 @@ export class RegisterAppointmentComponent {
   filteredDoctors: DoctorDto[] = [];
   constructor(private route: Router, private fb: FormBuilder, 
     private specialityService:SpecialityServiceService, 
-    private doctorService:DoctorServiceService) {}
+    private doctorService:DoctorServiceService,private appointMentService:AppointmentServiceService){}
     
   ngOnInit() {
     this.appointmentForm = this.fb.group({
+    doctor: this.fb.group({
       speciality: ['', Validators.required],
-      doctor: ['', Validators.required],
-      date: ['', Validators.required],
-      time: ['', Validators.required],
-    });
+      name: ['', Validators.required]
+    }),
+    date: ['', Validators.required],
+    time: ['', Validators.required]
+  });
     this.listSpeciality();
     this.listDoctor();
-    this.appointmentForm.get('speciality')?.valueChanges.subscribe(specialityId => {
+    this.appointmentForm.get('doctor.speciality')?.valueChanges.subscribe(specialityId => {
       console.log(specialityId);
       this.filterDoctorsBySpeciality(specialityId);
       this.appointmentForm.get('doctor')?.setValue('');
@@ -84,14 +88,27 @@ export class RegisterAppointmentComponent {
 
   confirmAppointment() {
     if (this.appointmentForm.valid) {
-      Swal.fire({
-        title: 'Cita confirmada',
-        text: 'Su cita ha sido confirmada exitosamente.',
-        icon: 'success',
-        confirmButtonText: 'Ir a pagar',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.route.navigate(['/pago']);
+      const formData = this.appointmentForm.value;
+      const Appointment = new appointment(formData.doctor,formData.date,formData.time);
+      console.log('Datos de la cita:', Appointment);
+      this.appointMentService.guardarCita(Appointment).subscribe({
+        next: (response) => {
+          console.log('Cita registrada correctamente', response);
+          Swal.fire({
+            title: '¡Cita registrada exitosamente!',
+            text: 'Su cita ha sido registrada correctamente.',
+            icon: 'success',
+          });
+          this.appointmentForm.reset();
+          this.route.navigate(['']);
+        },
+        error: (error) => {
+          console.error('Error al registrar la cita:', error);
+          Swal.fire({
+            title: 'Error al registrar la cita',
+            text: 'Por favor, intente nuevamente más tarde.',
+            icon: 'error',
+          });
         }
       });
     }else{
