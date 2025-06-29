@@ -5,6 +5,10 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { TopBarComponent } from "../top-bar/top-bar.component";
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppointmentSharedServiceService } from '../appointment-shared-service.service';
+import { AppointmentServiceService } from '../appointment-service.service';
+import { AppointmentsDto } from '../interfaces/appointmentsDto';
+import { PatientServiceService } from '../patient-service.service';
 @Component({
   selector: 'app-pago',
   imports: [CommonModule, FormsModule, TopBarComponent,ReactiveFormsModule],
@@ -14,10 +18,32 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class PagoComponent {
   selectedMethod:string = '';
   paymentForm!: FormGroup;
-  constructor(private route:Router ,private fb: FormBuilder) {}
+  appointmentToRegister!: AppointmentsDto | null;
+  constructor(private route:Router 
+    ,private fb: FormBuilder
+    ,private appointmentSharedService: AppointmentSharedServiceService
+    ,private appointmentService: AppointmentServiceService 
+    ,private pacienteService:PatientServiceService){}
   onMethodChange(){
     if(this.selectedMethod === 'mercadoPago'){
       this.loadMercadoPago();
+    }
+  }
+  goBackToForm() {
+  this.route.navigate(['/citas']);
+}
+  ngOnInit(){
+    this.appointmentToRegister = this.appointmentSharedService.getAppointment();
+    if(!this.appointmentToRegister){
+      Swal.fire({
+        title: 'Error',
+        text: 'No se encontró la cita a pagar.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      }).then(() => {
+        this.route.navigate(['/']);
+      });
+      this.route.navigate(['/citas']);
     }
   }
   loadMercadoPago(){
@@ -38,16 +64,46 @@ export class PagoComponent {
       });
     };
   }
-  onConfirmPayment(){
+  onConfirmPayment() {
+    if (!this.appointmentToRegister) {
+      Swal.fire({
+        title: 'Error',
+        text: 'No hay datos de cita para registrar.',
+        icon: 'error'
+      });
+      return;
+    }
     Swal.fire({
-      title: '¡Pago realizado con éxito!',
-      text: 'Gracias por tu compra.',
-      icon: 'success',
-      confirmButtonText: 'Aceptar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.route.navigate(['/']);
+      title: 'Procesando pago...',
+      text: 'Por favor, espera',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
       }
-  });
+    });
+    setTimeout(() => {
+      this.pacienteService.registrarCita(this.appointmentToRegister).subscribe({
+        next: (response) => {
+          console.log('Cita registrada correctamente', response);
+          Swal.fire({
+            title: '¡Pago exitoso!',
+            text: 'Tu cita ha sido registrada correctamente.',
+            icon: 'success'
+          }).then(() => {
+            // Limpio el dato guardado para la siguiente vez
+            this.appointmentSharedService.clearAppointment();
+            this.route.navigate(['/']);
+          });
+        },
+        error: (error) => {
+          console.error('Error al registrar la cita:', error);
+          Swal.fire({
+            title: 'Error al registrar la cita',
+            text: 'Inténtelo nuevamente más tarde.',
+            icon: 'error'
+          });
+        }
+      });
+    }, 1500);
   }
-  }
+}

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { appointment } from '../models/appointment';
+import { AppointmentsDto } from './interfaces/appointmentsDto';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AppointmentServiceService {
   listarCitas() {
     return this.httpClient.get<any[]>(`${this.url}/listar`);
   }
-  guardarCita(appointment:appointment){
+  guardarCita(appointment:AppointmentsDto | null){
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });

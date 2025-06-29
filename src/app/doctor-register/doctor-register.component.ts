@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl,FormGroup,FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ScheduleServiceService } from '../shedule-service.service';
+import { Schedule } from '../../models/schedule';
 
 @Component({
   selector: 'app-doctor-register',
@@ -16,13 +17,26 @@ export class DoctorRegisterComponent {
   constructor(private fb:FormBuilder, private route:Router,private scheduleService:ScheduleServiceService){}
   onSubmit(){
     const formData = this.doctorRegisterForm.value;
-    console.log("Form Data:", formData);
+    console.log("Form Data:", JSON.stringify(formData));
+    const schedule = new Schedule(undefined,formData.fecha, formData.horaInicio, formData.horaFin);
+    this.scheduleService.guardarHorarios(schedule).subscribe({
+      next: (response) => {
+        console.log('Schedule saved successfully:', response);
+        this.loadSchedules();
+        this.doctorRegisterForm.reset();
+      },
+      error: (error) => {
+        console.error('Error saving schedule:', error);
+      }
+    });
   }
   ngOnInit(){
     this.doctorRegisterForm = this.fb.group({
-      scheduleDate:['', Validators.required],
-      scheduleTime:['', Validators.required],
+      fecha:['', Validators.required],
+      horaInicio:['', Validators.required],
+      horaFin:['', Validators.required]
     });
+    this.loadSchedules();
   }
   goBack(){
     this.route.navigate(['/doctor']);
@@ -38,12 +52,11 @@ export class DoctorRegisterComponent {
       }
     });
   }
-  
   deleteSchedule(id:number){
     this.scheduleService.eliminarHorario(id).subscribe({
       next: (response) => {
         console.log('Schedule deleted successfully:', response);
-        this.loadSchedules(); // Reload schedules after deletion
+        this.loadSchedules();
       }
       , error: (error) => {
         console.error('Error deleting schedule:', error);

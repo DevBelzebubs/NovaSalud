@@ -19,6 +19,11 @@ import { user } from '../../models/user';
 import { DoctorDto } from '../interfaces/doctorDto';
 import { AppointmentServiceService } from '../appointment-service.service';
 import { appointment } from '../../models/appointment';
+import { Schedule } from '../../models/schedule';
+import { ScheduleServiceService } from '../shedule-service.service';
+import { PatientServiceService } from '../patient-service.service';
+import { AppointmentsDto } from '../interfaces/appointmentsDto';
+import { AppointmentSharedServiceService } from '../appointment-shared-service.service';
 @Component({
   selector: 'app-register-appointment',
   imports: [TopBarComponent, ReactiveFormsModule, FormsModule, CommonModule],
@@ -27,92 +32,134 @@ import { appointment } from '../../models/appointment';
 })
 export class RegisterAppointmentComponent {
   appointmentForm!: FormGroup;
-  specialities!:speciality[];
-  doctors:DoctorDto[] = [];
+  specialities!: speciality[];
+  doctors: DoctorDto[] = [];
   filteredDoctors: DoctorDto[] = [];
-  constructor(private route: Router, private fb: FormBuilder, 
-    private specialityService:SpecialityServiceService, 
-    private doctorService:DoctorServiceService,private appointMentService:AppointmentServiceService){}
-    
+  availableDates: Schedule[] = [];
+  constructor(
+    private route: Router,
+    private fb: FormBuilder,
+    private specialityService: SpecialityServiceService,
+    private doctorService: DoctorServiceService,
+    private appointMentService: AppointmentServiceService,
+    private schedulesService: ScheduleServiceService,
+    private pacienteService:PatientServiceService,
+    private appointmentSharedService: AppointmentSharedServiceService
+  ) {}
   ngOnInit() {
     this.appointmentForm = this.fb.group({
     doctor: this.fb.group({
       speciality: ['', Validators.required],
-      name: ['', Validators.required]
+      id: ['', Validators.required],
     }),
+    schedule: ['', Validators.required],
     date: ['', Validators.required],
-    time: ['', Validators.required]
+    time: ['', Validators.required],
   });
     this.listSpeciality();
     this.listDoctor();
-    this.appointmentForm.get('doctor.speciality')?.valueChanges.subscribe(specialityId => {
-      console.log(specialityId);
-      this.filterDoctorsBySpeciality(specialityId);
-      this.appointmentForm.get('doctor')?.setValue('');
-      this.doctors.forEach(doc => {
-        console.log(doc);
-      });
+    this.appointmentForm.get('doctor.speciality')?.valueChanges.subscribe((specialityId) => {
+    console.log('Especialidad seleccionada:', specialityId);
+    this.filterDoctorsBySpeciality(specialityId);
+    this.appointmentForm.get('doctor.name')?.reset('', { emitEvent: false });
+  });
+      this.loadAvailableSchedules();
+  }
+  loadAvailableSchedules() {
+    this.pacienteService.listarHorario().subscribe({
+      next: (data: Schedule[]) => {
+        this.availableDates = data;
+        console.log('Horarios disponibles:', this.availableDates);
+      },
+      error: (error) => {
+        console.error('Error fetching available schedules:', error);
+      },
     });
   }
-
-  listSpeciality(){
+  listSpeciality() {
     this.specialityService.listSpeciality().subscribe({
       next: (data) => {
         this.specialities = data;
       },
       error: (error) => {
-        console.error("Error fetching specialities:", error);
-      }
-    })
+        console.error('Error fetching specialities:', error);
+      },
+    });
   }
-
   listDoctor() {
     this.doctorService.listDoctors().subscribe({
       next: (data) => {
         this.doctors = data;
       },
       error: (error) => {
-        console.error("Error fetching doctors:", error);
-      }
+        console.error('Error fetching doctors:', error);
+      },
     });
   }
-
   filterDoctorsBySpeciality(specialityId: number) {
-    const especialidadSeleccionada = this.specialities.find(e => e.id === +specialityId)?.nombre;
+    const especialidadSeleccionada = this.specialities.find(
+      (e) => e.id === +specialityId
+    )?.nombre;
     if (!especialidadSeleccionada) {
       this.filteredDoctors = [];
       return;
     }
-    this.filteredDoctors = this.doctors.filter(doc => doc.especialidad === especialidadSeleccionada);
+    this.filteredDoctors = this.doctors.filter(
+      (doc) => doc.especialidad === especialidadSeleccionada
+    );
   }
+  onDoctorSelected(event: Event) {
+  const target = event.target as HTMLSelectElement;
+  const doctorId = target?.value;
+  
+  if (!doctorId) {
+    this.availableDates = [];
+    return;
+  }
+  const idNumber = +doctorId;
+  this.appointmentForm.get('doctor.id')?.setValue(idNumber);
+  this.loadAvailableSchedules();
+}
 
-  confirmAppointment() {
-    if (this.appointmentForm.valid) {
-      const formData = this.appointmentForm.value;
-      const Appointment = new appointment(formData.doctor,formData.date,formData.time);
-      console.log('Datos de la cita:', Appointment);
-      this.appointMentService.guardarCita(Appointment).subscribe({
-        next: (response) => {
-          console.log('Cita registrada correctamente', response);
-          Swal.fire({
-            title: '¡Cita registrada exitosamente!',
-            text: 'Su cita ha sido registrada correctamente.',
-            icon: 'success',
-          });
-          this.appointmentForm.reset();
-          this.route.navigate(['']);
-        },
-        error: (error) => {
-          console.error('Error al registrar la cita:', error);
-          Swal.fire({
-            title: 'Error al registrar la cita',
-            text: 'Por favor, intente nuevamente más tarde.',
-            icon: 'error',
-          });
-        }
-      });
-    }else{
-      this.appointmentForm.markAllAsTouched();
+  onHorarioSelected(event: Event) {
+  const selectElement = event.target as HTMLSelectElement;
+  const selectedId = +selectElement.value;
+  if (!selectedId) return;
+  const selectedHorario = this.availableDates.find(h => h.id === selectedId);
+  if (!selectedHorario) return;
+  this.appointmentForm.get('date')?.setValue(selectedHorario.fecha);
+  this.appointmentForm.get('time')?.setValue(selectedHorario.horaInicio);
+  this.appointmentForm.get('schedule')?.setValue(selectedId);
+}
+  onDoctorChange(doctorId:string) {
+    if (!doctorId) {
+      this.availableDates = [];
+      return;
     }
+    const id = +doctorId;
+    this.appointmentForm.get('doctor.id')?.setValue(id);
+    this.loadAvailableSchedules();
   }
+  confirmAppointment() {
+  console.log('Confirming appointment with form data:', this.appointmentForm.value);
+  if (this.appointmentForm.valid) {
+    const formData = this.appointmentForm.value;
+    const doctorId = Number(formData.doctor.id);
+    const horarioId = Number(formData.schedule);
+    if (!doctorId || !horarioId) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Debe seleccionar un doctor y un horario válido.',
+        icon: 'error',
+      });
+      return;
+    }
+    const appointmentRequest = new AppointmentsDto(doctorId, horarioId);
+    this.appointmentSharedService.setAppointment(appointmentRequest);
+    console.log('Datos de la cita guardados para pago:', appointmentRequest);
+    this.route.navigate(['/pago']);
+  } else {
+    this.appointmentForm.markAllAsTouched();
+  }
+}
 }

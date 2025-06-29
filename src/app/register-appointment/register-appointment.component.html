@@ -1,8 +1,7 @@
 <app-top-bar></app-top-bar>
-<form [formGroup]="appointmentForm" class="appointmentContainer">
+<form [formGroup]="appointmentForm" (ngSubmit)="confirmAppointment()" class="appointmentContainer">
   <div formGroupName="doctor" class="step stepSelection">
     <h2>Seleccione especialidad y doctor</h2>
-
     <select class="inputField" formControlName="speciality">
       <option value="" disabled>Seleccione una especialidad</option>
       @for (item of specialities; track $index) {
@@ -12,37 +11,40 @@
     @if (appointmentForm.get('doctor.speciality')?.invalid && appointmentForm.get('doctor.speciality')?.touched) {
       <div class="error">La especialidad es obligatoria.</div>
     }
-    <select class="inputField" formControlName="name">
+    <select class="inputField" formControlName="id" (change)="onDoctorSelected($event)">
       <option value="" disabled selected>Seleccione un doctor</option>
       @for (item of filteredDoctors; track $index) {
         <option [value]="item.id">Dr. {{ item.nombre }} {{ item.apellido }}</option>
       }
     </select>
-    @if (appointmentForm.get('doctor.name')?.invalid && appointmentForm.get('doctor.name')?.touched) {
+    @if (appointmentForm.get('doctor.id')?.invalid && appointmentForm.get('doctor.id')?.touched) {
       <div class="error">El doctor es obligatorio.</div>
     }
   </div>
-
   <div class="step stepSchedule">
-    <h2>Escoja fecha y hora</h2>
-    <input type="date" class="inputField" formControlName="date" />
-    @if (appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched) {
-      <div class="error">
-        La fecha es obligatoria.
-      </div>
-    }
+    <h2>Escoja horario disponible</h2>
+    <select class="inputField" formControlName="schedule" (change)="onHorarioSelected($event)">
+      <option value="" disabled selected>Seleccione un horario</option>
+      @for (h of availableDates; track $index) {
+        <option [value]="h.id">
+          {{ h.fecha }} de {{ h.horaInicio }} a {{ h.horaFin }}
+        </option>
+      }
+    </select>
 
-    <input type="time" class="inputField" formControlName="time" />
+    <input type="date" class="inputField" formControlName="date" readonly />
+    <input type="time" class="inputField" formControlName="time" readonly />
+
+    @if (appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched) {
+      <div class="error">La fecha es obligatoria.</div>
+    }
     @if (appointmentForm.get('time')?.invalid && appointmentForm.get('time')?.touched) {
-      <div class="error">
-        La hora es obligatoria.
-      </div>
+      <div class="error">La hora es obligatoria.</div>
     }
   </div>
-
   <div class="step stepConfirmation">
     <h2>Confirme cita</h2>
-    <button type="button" class="primaryButton" (click)="confirmAppointment()">
+    <button type="submit" class="primaryButton">
       Book Appointment
     </button>
   </div>

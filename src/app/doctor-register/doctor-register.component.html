@@ -4,8 +4,10 @@
         <h1>Registrar horario</h1>
         <form [formGroup]="doctorRegisterForm" (ngSubmit)="onSubmit()">
             <div class="scheduleRegister">
-                <input type="date" formControlName="scheduleDate" placeholder="Fecha y hora de la cita" required />
-                <input type="time" formControlName="scheduleTime" placeholder="Hora de la cita" required />
+                <input type="date" formControlName="fecha" placeholder="Fecha" required />
+                <input type="time" formControlName="horaInicio" placeholder="Hora inicio" required />
+                <input type="time" formControlName="horaFin" placeholder="Hora fin" required />
+                <button class="btnForm" type="submit" [disabled]="doctorRegisterForm.invalid">Registrar</button>
             </div>
         </form>
     </div>
@@ -14,8 +16,9 @@
         <div class="listSchedule">
             @for (item of scheduleList; track $index){
                 <div class="scheduleItem">
-                    <span class="scheduleDate">{{ item.scheduleDate | date: 'dd/MM/yyyy' }}</span>
-                    <span class="scheduleTime">{{ item.scheduleTime | date: 'shortTime' }}</span>
+                    <span>{{item.localDate}}</span>
+                    <span class="scheduleDate">{{ item.horaInicio | date: 'dd/MM/yyyy' }}</span>
+                    <span class="scheduleTime">{{ item.horaFin | date: 'shortTime' }}</span>
                     <button (click)="deleteSchedule(item.id)">Eliminar</button>
                 </div>
             }

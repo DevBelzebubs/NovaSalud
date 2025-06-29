@@ -25,4 +25,11 @@ export class PatientServiceService {
   deletePatient(id:number):Observable<patient>{
     return this.httpClient.delete<patient>(this.url + '/eliminar/' + id);
   }
+  listarHorario(){
+    return this.httpClient.get<any[]>(`${this.url}/listar-horario`);
+  }
+  registrarCita(appointment:any){
+    const headers = { 'Content-Type': 'application/json' };
+    return this.httpClient.post<any>(`${this.url}/registrar-cita`, appointment, { headers });
+  }
 }

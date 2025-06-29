@@ -1,4 +1,16 @@
 <div class="appContainer">
+  <div class="step">
+    <h2>Resumen de tu cita</h2>
+    <div *ngIf="appointmentToRegister">
+      <p><strong>Doctor ID:</strong> {{ appointmentToRegister.doctorId }}</p>
+      <p><strong>Horario ID:</strong> {{ appointmentToRegister.horaCita }}</p>
+    </div>
+    <div *ngIf="!appointmentToRegister">
+      <p>No hay datos de cita para procesar el pago.</p>
+      <button class="secondaryButton" (click)="goBackToForm()">Volver al formulario</button>
+    </div>
+  </div>
+  
     <div class="step">
     <h2>Selecciona un método de pago</h2>
     <select class="inputField" [(ngModel)]="selectedMethod" (change)="onMethodChange()">
@@ -26,7 +38,6 @@
         <button class="primaryButton" (click)="onConfirmPayment()">Confirmar pago</button>
     </div>
   </div>
-
   <div class="step" *ngIf="selectedMethod === 'mercadoPago'">
     <h2>Pagar con Mercado Pago</h2>
     <div id="wallet_container"></div>
