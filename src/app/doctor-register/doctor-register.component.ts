@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ScheduleServiceService } from '../shedule-service.service';
 import { Schedule } from '../../models/schedule';
 import Swal from 'sweetalert2';
+import { DoctorServiceService } from '../doctor-service.service';
 @Component({
   selector: 'app-doctor-register',
   imports: [ReactiveFormsModule,CommonModule],
@@ -14,7 +15,7 @@ import Swal from 'sweetalert2';
 export class DoctorRegisterComponent {
   doctorRegisterForm!:FormGroup;
   scheduleList!: any[];
-  constructor(private fb:FormBuilder, private route:Router,private scheduleService:ScheduleServiceService){}
+  constructor(private fb:FormBuilder, private route:Router,private scheduleService:ScheduleServiceService, private doctorService:DoctorServiceService){}
   onSubmit(){
     const formData = this.doctorRegisterForm.value;
     console.log("Form Data:", JSON.stringify(formData));
@@ -48,7 +49,7 @@ export class DoctorRegisterComponent {
     this.route.navigate(['/doctor']);
   }
   loadSchedules() {
-    this.scheduleService.listarHorarios().subscribe({
+    this.doctorService.listarHorarios().subscribe({
       next: (response) => {
         this.scheduleList = response;
         console.log('Schedules loaded successfully:', this.scheduleList);
