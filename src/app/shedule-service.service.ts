@@ -5,7 +5,7 @@ import { Schedule } from '../models/schedule';
   providedIn: 'root'
 })
 export class ScheduleServiceService {
-  private url = 'http://localhost:8080/api/doctor'
+  private url = 'https://api-hospital-novasalud-aebedqh3cfcrgfc8.ukwest-01.azurewebsites.net/api/doctor'
   constructor(private httpClient: HttpClient) { } 
   listarHorarios() {
     return this.httpClient.get<any[]>(`${this.url}/listar`);
