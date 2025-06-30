@@ -4,7 +4,7 @@ import { FormBuilder, FormControl,FormGroup,FormsModule,ReactiveFormsModule, Val
 import { Router } from '@angular/router';
 import { ScheduleServiceService } from '../shedule-service.service';
 import { Schedule } from '../../models/schedule';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-doctor-register',
   imports: [ReactiveFormsModule,CommonModule],
@@ -21,6 +21,12 @@ export class DoctorRegisterComponent {
     const schedule = new Schedule(undefined,formData.fecha, formData.horaInicio, formData.horaFin);
     this.scheduleService.guardarHorarios(schedule).subscribe({
       next: (response) => {
+        Swal.fire({
+          title: 'Success',
+          text: 'Horario guardado correctamente',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
         console.log('Schedule saved successfully:', response);
         this.loadSchedules();
         this.doctorRegisterForm.reset();

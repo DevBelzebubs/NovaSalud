@@ -5,7 +5,7 @@ import { user } from '../models/user';
   providedIn: 'root'
 })
 export class UserServiceService {
-  url = 'https://api-hospital-novasalud-aebedqh3cfcrgfc8.ukwest-01.azurewebsites.net/api/usuarios';
+  url = 'http://localhost:8080/api/usuarios';
   constructor(private httpClient:HttpClient){}
   addUser(user:user){
     return this.httpClient.post<user>(this.url + '/registrar', user);

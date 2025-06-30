@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PatientServiceService {
-  url = 'https://api-hospital-novasalud-aebedqh3cfcrgfc8.ukwest-01.azurewebsites.net/api/paciente';
+  url = 'http://localhost:8080/api/paciente';
   constructor(private httpClient:HttpClient){}
 
   addPatient(patient:patient):Observable<patient>{
@@ -31,5 +31,8 @@ export class PatientServiceService {
   registrarCita(appointment:any){
     const headers = { 'Content-Type': 'application/json' };
     return this.httpClient.post<any>(`${this.url}/registrar-cita`, appointment, { headers });
+  }
+  listarCitas(): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${this.url}/mis-citas`);
   }
 }
