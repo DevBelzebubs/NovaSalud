@@ -90,7 +90,6 @@ export class PagoComponent {
             text: 'Tu cita ha sido registrada correctamente.',
             icon: 'success'
           }).then(() => {
-            // Limpio el dato guardado para la siguiente vez
             this.appointmentSharedService.clearAppointment();
             this.route.navigate(['/']);
           });
