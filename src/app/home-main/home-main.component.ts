@@ -1,9 +1,9 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { TopBarComponent } from "../top-bar/top-bar.component";
 import { AboutUsComponent } from "../about-us/about-us.component";
 import { SpecialitiesComponent } from "../specialities/specialities.component";
 import { BottomMainComponent } from "../bottom-main/bottom-main.component";
-
+import { ElementRef } from "@angular/core";
 @Component({
   selector: 'app-home-main',
   imports: [TopBarComponent, AboutUsComponent, SpecialitiesComponent, BottomMainComponent],
@@ -13,14 +13,14 @@ import { BottomMainComponent } from "../bottom-main/bottom-main.component";
 export class HomeMainComponent {
   img = ['assets/img/img1.jpg', 'assets/img/img2.jpg', 'assets/img/img3.jpg', 'assets/img/img4.jpg'];
   imgIndex = 0;
-  slideWidth = window.innerWidth;
+  slideWidth = 0;
+  @ViewChild('imgItem',{static:false}) imgItem!: ElementRef<HTMLImageElement>;
 
 get transformStyle(): string {
   return `translateX(-${this.imgIndex * this.slideWidth}px)`;
 }
 
 ngOnInit(): void {
-  this.updateSlideWidth();
   setInterval(() => {
     this.imgIndex = (this.imgIndex + 1) % this.img.length;
   }, 5000);
@@ -30,7 +30,8 @@ ngAfterViewInit(): void {
 }
 @HostListener('window:resize', [])
   updateSlideWidth(): void {
-    this.slideWidth = window.innerWidth;
+    if (this.imgItem?.nativeElement) {
+      this.slideWidth = this.imgItem.nativeElement.offsetWidth;
+    }
   }
-
 }

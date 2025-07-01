@@ -28,9 +28,6 @@
     .wrapperText{
         margin-top: 200px;
     }
-    .imgItem{
-        width: 1700px;
-    }
 }
 @media (max-width: 841px) {
     .appComponent{
@@ -41,9 +38,6 @@
         margin-left: -90px;
         width: 90%;
         font-size: large;
-    }
-    .imgItem{
-        width: 1500px;
     }
 }
 @media (max-width: 768px) {
@@ -57,17 +51,10 @@
             margin-top: 500px;
             margin-left: -180px;
         }
-        .imgItem{
-            width: 800px;
-        }
     }
     @media (max-width: 660px) {
         .wrapperText{
             margin-top: 500px;
             margin-left: -230px;
         }
-        .imgItem{
-            width: 600px;
-        }
-        
-    }
+}

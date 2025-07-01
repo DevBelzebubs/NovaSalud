@@ -2,7 +2,7 @@
 <div class="appComponent">
     <div class="imgWrapper" [style.transform]="transformStyle">
         @for (item of img; track $index){
-            <img [src]="item" class="imgItem">
+            <img [src]="item" class="imgItem" #imgItem>
         }
     </div>
     <div class="wrapperText">
