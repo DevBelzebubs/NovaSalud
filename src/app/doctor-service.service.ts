@@ -26,4 +26,7 @@ export class DoctorServiceService {
   deleteDoctor(id:number):Observable<doctor>{
     return this.httpClient.delete<doctor>(this.url + '/eliminar' + id);
   }
+  listarHorarios(): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.url + '/listar-horario');
+  }
 }

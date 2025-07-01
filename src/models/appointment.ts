@@ -4,6 +4,9 @@ import { patient } from "./patient";
 export class appointment{
     constructor(public doctor:doctor, 
         public localDate:Date,
-        public localTime:string){
+        public localTime:string,
+        public fechaCita:string,
+        public horaCita:string,
+    ){
     }
 }

@@ -60,7 +60,9 @@ export class LoginComponent {
           this.route.navigate(['/admin']);
         } else if (rol === 'ROL_RECEPCIONISTA') {
           this.route.navigate(['/recepcion']);
-        } else {
+        }else if (rol === 'ROL_DOCTOR') {
+          this.route.navigate(['/doctor']);
+          } else {
           this.route.navigate(['/']);
         }
       },

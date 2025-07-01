@@ -32,4 +32,7 @@ export class PatientServiceService {
     const headers = { 'Content-Type': 'application/json' };
     return this.httpClient.post<any>(`${this.url}/registrar-cita`, appointment, { headers });
   }
+  listarCitas(): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${this.url}/mis-citas`);
+  }
 }

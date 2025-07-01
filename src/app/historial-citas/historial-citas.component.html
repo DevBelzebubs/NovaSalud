@@ -6,9 +6,9 @@
             @for (item of citas; track $index){
                 <div class="citasItem">
                     <div class="doctorContainer">
-                    </div>
-                    <div class="prescripctionContainer">
-                        <h2></h2>
+                        <h2>{{ item.doctor }}</h2>
+                        <h2>{{item.fechaCita}}</h2>
+                        <h2>{{item.horaCita}}</h2>
                     </div>
                 </div>
             }
