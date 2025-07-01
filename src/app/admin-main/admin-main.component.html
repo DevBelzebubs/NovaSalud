@@ -1,59 +1,62 @@
 <app-top-bar></app-top-bar>
 
-<div class="appContainer">
-  <div class="userManagementContainer">
-    <h2>Gestión de usuarios</h2>
-    <div class="userManagement">
-      <button class="doctorRegister" (click)="doctorRegister()">
-        Registrar doctor
-      </button>
-      <button class="recepcionistRegister" (click)="recepcionistRegister()">
-        Registrar recepcionista
-      </button>
-    </div>
-  </div>
-
-  <div class="specialitiesTableContainer">
-    <div class="specialitiesTable">
-      <table>
-        <thead>
-          <tr>
-            <th>Especialidad</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (item of specialities; track $index) {
-          <tr>
-            <td>{{ item.nombre }}</td>
-            <td>
-              <div class="tableButtons">
-                <button class="deleteButton" (click)="deleteSpeciality(item.id)">X</button>
-              </div>
-            </td>
-          </tr>
-          }
-        </tbody>
-      </table>
-      <div>
-        <button class="displayForm" (click)="toggleForm()">+</button>
+  <div class="appContainer">
+    <div class="userManagementContainer">
+      <h2>Gestión de usuarios</h2>
+      <div class="userManagement">
+        <button class="doctorRegister" (click)="doctorRegister()">
+          Registrar doctor
+        </button>
+        <button class="recepcionistRegister" (click)="recepcionistRegister()">
+          Registrar recepcionista
+        </button>
       </div>
-      @if (specilityForm){
-        <div class="formContainer">
-          <h1>Añadir especialidades</h1>
-          <form [formGroup]="formSpeciality" class="formSpeciality">
-            <div class="itmSpeciality">
-              <label for="name">Nombre:</label>
-              <input id="name" type="text" placeholder="Nombre..." formControlName="name">
-            </div>
-            <div class="itmSpeciality">
-              <label for="speciality">Descripción</label>
-              <textarea id="speciality" placeholder="Descripción..." formControlName="speciality"></textarea>
-            </div>
-            <button class="addButton" (click)="addSpeciality()">Añadir</button>
-          </form>
+    </div>
+
+    <div class="specialitiesTableContainer">
+      <div class="specialitiesTable">
+        <table>
+          <thead>
+            <tr>
+              <th>Especialidad</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of specialities; track $index) {
+            <tr>
+              <td>{{ item.nombre }}</td>
+              <td>
+                <div class="tableButtons">
+                  <button class="deleteButton" (click)="deleteSpeciality(item.id)">X</button>
+                  <button class="editButton" (click)="startEditSpeciality(item.id)">Editar</button>
+                </div>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+        <div>
+          <button class="displayForm" (click)="toggleForm()">+</button>
         </div>
-      }
+        @if (specilityForm){
+        <div class="formContainer">
+          <h1 *ngIf="!isEditing">Añadir especialidad</h1>
+          <h1 *ngIf="isEditing">Editar especialidad</h1>
+        <form [formGroup]="formSpeciality" class="formSpeciality" id="formSpeciality">
+          <div class="itmSpeciality">
+            <label for="name">Nombre:</label>
+            <input id="name" type="text" placeholder="Nombre..." formControlName="name">
+          </div>
+        <div class="itmSpeciality">
+          <label for="speciality">Descripción</label>
+          <textarea id="speciality" placeholder="Descripción..." formControlName="speciality"></textarea>
+        </div>
+          <button class="addButton" *ngIf="!isEditing" (click)="addSpeciality()">Añadir</button>
+          <button class="editButton" *ngIf="isEditing" (click)="saveEditSpeciality()">Guardar cambios</button>
+        </form>
+  </div>
+}
+      </div>
     </div>
   </div>
-</div>

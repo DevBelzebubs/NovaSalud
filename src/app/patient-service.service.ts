@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PatientServiceService {
-  url = 'https://api-hospital-novasalud-aebedqh3cfcrgfc8.ukwest-01.azurewebsites.net/api/paciente';
+  url = 'http://localhost:8080/api/paciente';
   constructor(private httpClient:HttpClient){}
 
   addPatient(patient:patient):Observable<patient>{

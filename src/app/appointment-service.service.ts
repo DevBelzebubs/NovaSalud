@@ -7,7 +7,7 @@ import { AppointmentsDto } from './interfaces/appointmentsDto';
   providedIn: 'root'
 })
 export class AppointmentServiceService {
-  private url = 'https://api-hospital-novasalud-aebedqh3cfcrgfc8.ukwest-01.azurewebsites.net/api/cita-medica';
+  private url = 'http://localhost:8080/api/cita-medica';
   constructor(private httpClient: HttpClient){ }
   listarCitas() {
     return this.httpClient.get<any[]>(`${this.url}/listar`);

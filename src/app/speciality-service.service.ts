@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SpecialityServiceService {
-  url = 'https://api-hospital-novasalud-aebedqh3cfcrgfc8.ukwest-01.azurewebsites.net/api/especialidades'
+  url = 'http://localhost:8080/api/especialidades';
   constructor(private httpClient:HttpClient){}
   listSpeciality(){
     console.log("Fetching specialities from: " + this.url);
@@ -18,5 +18,11 @@ export class SpecialityServiceService {
   }
   deleteSpeciality(id:number):Observable<any>{
     return this.httpClient.delete(this.url + `/eliminar/${id}`);
+  }
+  editSpeciality(id:number, speciality:speciality):Observable<any>{
+    return this.httpClient.put<speciality>(this.url + `/actualizar/${id}`, speciality);
+  }
+  getSpeciality(id: number): Observable<speciality> {
+    return this.httpClient.get<speciality>(this.url + `/${id}`);
   }
 }

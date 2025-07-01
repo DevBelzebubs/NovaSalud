@@ -9,7 +9,7 @@ import { DoctorDto } from './interfaces/doctorDto';
 })
 export class DoctorServiceService {
 
-  url = 'https://api-hospital-novasalud-aebedqh3cfcrgfc8.ukwest-01.azurewebsites.net/api/doctor'
+  url = 'http://localhost:8080/api/doctor';
   constructor(private httpClient:HttpClient){}
   addDoctor(doctor:doctor):Observable<doctor>{
     return this.httpClient.post<doctor>(this.url + '/registrar', doctor);
