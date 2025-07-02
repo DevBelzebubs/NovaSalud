@@ -34,6 +34,43 @@
 .topMain{
     width: 101%;
 }
+.dashAdmin{
+    cursor: pointer;
+    color: #007BFF;
+    font-weight: bold;
+}
+.dashAdmin:hover{
+    transition: color 0.3s ease;
+    color: #0056b3;
+}
+.registerAppointment{
+    cursor: pointer;
+    color: #007BFF;
+    font-weight: bold;
+}
+.historyAppointment{
+    cursor: pointer;
+    color: #007BFF;
+    font-weight: bold;
+}
+.registerAppointment:hover,
+.historyAppointment:hover{
+    transition: color 0.3s ease;
+    color: #0056b3;
+}
+.dashDoctor{
+    cursor: pointer;
+    color: #007BFF;
+    font-weight: bold;
+}
+.dashDoctor:hover{
+    transition: color 0.3s ease;
+    color: #0056b3;
+}
+.unlogedItem{
+    cursor: pointer;
+    color: #575757;
+}
 .optionsRedirect{
     display: flex;
     flex-direction: row;

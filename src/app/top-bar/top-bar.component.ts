@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import {ActivatedRoute, Route, Router} from '@angular/router';
 import { AuthService } from '../auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-top-bar',
@@ -54,5 +55,20 @@ export class TopBarComponent {
   }
   recepcionistaDashboard(){
     this.route.navigate(['/recepcionista']);
+  }
+  unlogedDashboard(){
+    Swal.fire({
+      title: '¡Atención!',
+      text: 'Para acceder a esta sección, debes iniciar sesión.',
+      icon: 'warning',
+      confirmButtonText: 'Iniciar sesión',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.route.navigate(['/login']);
+      }
+    });  
   }
 }

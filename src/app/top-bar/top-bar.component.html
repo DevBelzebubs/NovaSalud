@@ -31,21 +31,21 @@
       </div>
       <div class="optionsRedirect">
         @if (rol === 'ROL_PACIENTE') {
-          <span class="optionItem" style="font-size: 150%" (click)="registrarCita()">Registrar cita</span>
-          <span class="optionItem" style="font-size: 150%" (click)="historialMedico()">Historial de citas</span>
+          <span class="registerAppointment" style="font-size: 150%" (click)="registrarCita()">Registrar cita</span>
+          <span class="historyAppointment" style="font-size: 150%" (click)="historialMedico()">Historial de citas</span>
         }
         @else if (rol === 'ROL_ADMIN') {
-          <span class="optionItem" style="font-size: 150%" (click)="adminDashboard()">Dashboard Admin</span>
+          <span class="dashAdmin" style="font-size: 150%" (click)="adminDashboard()">Dashboard Admin</span>
         }
         @else if (rol === 'ROL_DOCTOR') {
-          <span class="optionItem" style="font-size: 150%" (click)="doctorDashboard()">Dashboard Médico</span>
+          <span class="dashDoctor" style="font-size: 150%" (click)="doctorDashboard()">Dashboard Médico</span>
         }
         @else if (rol==='ROL_RECEPCIONISTA') {
           <span class="optionItem" style="font-size: 150%" (click)="goTo('recepcionista')">Dashboard Recepcionista</span>
         }
         @else {
-          <span class="optionItem" style="font-size: 150%" (click)="registrarCita()">Registrar cita</span>
-          <span class="optionItem" style="font-size: 150%" (click)="historialMedico()">Historial de citas</span>
+          <span class="unlogedItem" style="font-size: 150%" (click)="unlogedDashboard()">Registrar cita</span>
+          <span class="unlogedItem" style="font-size: 150%" (click)="unlogedDashboard()">Historial de citas</span>
         }
       </div>
       <span class="optionItem" style="font-size: 150%"></span>
