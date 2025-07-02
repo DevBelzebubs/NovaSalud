@@ -25,35 +25,28 @@
   <div class="bottomContainer">
     <div class="optionsContainer">
       <div class="optionsRedirect">
-        <span class="optionItem" style="font-size: 150%" (click)="inicio()"
-          >Inicio</span
-        >
-        <span
-          class="optionItem"
-          style="font-size: 150%"
-          (click)="goTo('about-us')"
-          >Acerca de Nosotros</span
-        >
-        <span
-          class="optionItem"
-          style="font-size: 150%"
-          (click)="goTo('specialities')"
-          >Especialidades</span
-        >
+        <span class="optionItem" style="font-size: 150%" (click)="inicio()">Inicio</span>
+        <span class="optionItem" style="font-size: 150%" (click)="goTo('about-us')">Acerca de Nosotros</span>
+        <span class="optionItem" style="font-size: 150%" (click)="goTo('specialities')">Especialidades</span>
       </div>
       <div class="optionsRedirect">
-        <span
-          class="optionItem"
-          style="font-size: 150%"
-          (click)="registrarCita()"
-          >Registrar cita</span
-        >
-        <span
-          class="optionItem"
-          style="font-size: 150%"
-          (click)="historialMedico()"
-          >Historial de citas</span
-        >
+        @if (rol === 'ROL_PACIENTE') {
+          <span class="optionItem" style="font-size: 150%" (click)="registrarCita()">Registrar cita</span>
+          <span class="optionItem" style="font-size: 150%" (click)="historialMedico()">Historial de citas</span>
+        }
+        @else if (rol === 'ROL_ADMIN') {
+          <span class="optionItem" style="font-size: 150%" (click)="adminDashboard()">Dashboard Admin</span>
+        }
+        @else if (rol === 'ROL_DOCTOR') {
+          <span class="optionItem" style="font-size: 150%" (click)="doctorDashboard()">Dashboard Médico</span>
+        }
+        @else if (rol==='ROL_RECEPCIONISTA') {
+          <span class="optionItem" style="font-size: 150%" (click)="goTo('recepcionista')">Dashboard Recepcionista</span>
+        }
+        @else {
+          <span class="optionItem" style="font-size: 150%" (click)="registrarCita()">Registrar cita</span>
+          <span class="optionItem" style="font-size: 150%" (click)="historialMedico()">Historial de citas</span>
+        }
       </div>
       <span class="optionItem" style="font-size: 150%"></span>
     </div>

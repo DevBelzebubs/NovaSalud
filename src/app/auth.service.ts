@@ -46,6 +46,10 @@ export class AuthService {
     this.currentUserSubject.next(JSON.parse(storedUser));
   }
 }
+  getRole(): string | null {
+    const user = this.getUserData();
+    return user ? user.rol : null;
+  }
   getToken(): string | null{
     return localStorage.getItem('jwt_token');
   }
