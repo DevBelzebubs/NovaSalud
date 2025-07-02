@@ -73,5 +73,8 @@ export class LoginComponent {
     });
   }
 }
+onRegister(){
+  this.route.navigate(['/register']);
+}
 
 }

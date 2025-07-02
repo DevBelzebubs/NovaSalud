@@ -5,8 +5,8 @@
   position: relative;
   overflow: hidden;
   margin-bottom: -20px;
-  margin-left: -8px;
-  margin-right: -8px;
+  margin-left: -0.55vw;
+  margin-right: -0.40vw;
 }
 
 .bottomImg {
@@ -68,9 +68,24 @@
   margin-top: -5px;
   margin-left: -33px;
 }
+@media (max-width: 1200px) {
+  .appContainer {
+    margin-left: -1.5vw;
+    margin-right: -1.5vw;
+  }
+  .bottomImg {
+    height: 350px;
+  }
+}
 @media (max-width:1028px){
+  .appContainer {
+    margin-right: -7vh;
+  }
   .whatsNew{
-    margin-top: 40px;
+    margin-top: 10vh;
+  }
+  .footerContainer{
+    margin-bottom: 3vh;
   }
 }
 @media (max-width: 768px) {
@@ -81,20 +96,23 @@
   .appContainer{
     width: 107.5%;
     margin-bottom: -15px;
-    margin-left: -8px;
+    margin-left: -7.7px;
+  }
+  .footerContainer{
+    margin-bottom: 15vh;
   }
   .whatsNew, .staywithUs {
     width: 80%;
     text-align: center;
   }
-
+  .staywithUs {
+    margin-top: -6vh;
+  }
   .whatsNew h1, .staywithUs h1 {
     font-size: 1.5rem;
   }
-  .whatsNew h3{
-    margin-top: 40px;
-  }
   .footerItem {
+    margin-top: -2vh;
     justify-content: center;
   }
 }

@@ -93,6 +93,9 @@
 .formContainer select{
   margin: 10px;
 }
+.formSeccion1 span{
+  cursor: pointer;
+}
 @media (max-width:1000px){
   .appContainer{
     display: flex;
