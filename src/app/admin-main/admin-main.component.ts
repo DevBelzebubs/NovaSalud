@@ -60,7 +60,6 @@ export class AdminMainComponent {
       },
       error: (error) => {
         console.error("Error fetching specialities:", error);
-        console.log(this.authService.getToken());
       }
     })
   }

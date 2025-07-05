@@ -13,6 +13,7 @@ import { DoctorRegisterComponent } from './doctor-register/doctor-register.compo
 import { AdminMainComponent } from './admin-main/admin-main.component';
 import { RegDoctorComponent } from './reg-doctor/reg-doctor.component';
 import { RegRecepcionistComponent } from './reg-recepcionist/reg-recepcionist.component';
+import { RecepcionistMainComponent } from './recepcionist-main/recepcionist-main.component';
 
 export const routes: Routes = [
     {path:'',component:HomeMainComponent},
@@ -26,4 +27,5 @@ export const routes: Routes = [
     {path:'admin',component:AdminMainComponent, canActivate:[AuthGuard], data: { roles:['ROL_ADMIN']} },
     {path:'registrar-doctor',component:RegDoctorComponent, canActivate:[AuthGuard], data: { roles:['ROL_ADMIN']} },
     {path:'registrar-recepcionista',component:RegRecepcionistComponent, canActivate:[AuthGuard], data: { roles:['ROL_ADMIN']} },
+    {path:'recepcion', component:RecepcionistMainComponent, canActivate:[AuthGuard], data: {roles:['ROL_RECEPCIONISTA']}}
 ];

@@ -54,7 +54,7 @@ export class TopBarComponent {
   
   }
   recepcionistaDashboard(){
-    this.route.navigate(['/recepcionista']);
+    this.route.navigate(['/recepcion']);
   }
   unlogedDashboard(){
     Swal.fire({

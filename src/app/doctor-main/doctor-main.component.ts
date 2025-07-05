@@ -7,6 +7,7 @@ import { HomeMainComponent } from "../home-main/home-main.component";
 import { TopBarComponent } from "../top-bar/top-bar.component";
 import { Router } from '@angular/router';
 import { SpecialityServiceService } from '../speciality-service.service';
+import { PatientServiceService } from '../patient-service.service';
 
 @Component({
   selector: 'app-doctor-main',
@@ -15,13 +16,24 @@ import { SpecialityServiceService } from '../speciality-service.service';
   styleUrl: './doctor-main.component.css'
 })
 export class DoctorMainComponent {
-  citas:appointment[] = [];
-  constructor(private route:Router, private specialityService:SpecialityServiceService){}
+  citas:patient[] = []
+  constructor(private route:Router, private patientService:PatientServiceService){
+    this.listCitas();
+  }
   registrarHorario(){
     this.route.navigate(['/registrar-horario'])
   }
   salir(){
       this.route.navigate(['/']);
   }
-  
+  listCitas(){
+    this.patientService.listarCitas().subscribe({
+      next:(data) =>{
+        this.citas = data;
+      },
+      error:(err) =>{
+        console.error(err);
+      }
+    })
+  }
 }

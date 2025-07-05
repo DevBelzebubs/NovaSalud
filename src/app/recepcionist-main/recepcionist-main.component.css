@@ -1,0 +1,171 @@
+.appContainer {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f0f8ff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 60, 120, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.appContainer h1 {
+    text-align: center;
+    color: #005a9c;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.tableContainer {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 60, 120, 0.1);
+    width: 90%;
+    margin: 0 auto;
+}
+
+.medicineTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.medicineTable th {
+    background-color: #0077cc;
+    color: white;
+    padding: 0.3rem;
+    font-size: 1.2rem;
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+}
+
+.medicineTable td {
+    padding: 0.9rem 1rem;
+    font-size: 1.05rem;
+    color: #333;
+    background-color: #f9fbfd;
+    border-bottom: 1px solid #d6e4f0;
+    text-align: center;
+    vertical-align: middle;
+    transition: background-color 0.3s;
+}
+
+.medicineTable tr:hover td {
+    background-color: #e6f2ff;
+}
+
+.tableButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.editButton {
+    background-color: #ffc107;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.editButton:hover {
+    background-color: #e0a800;
+}
+
+.deleteButton {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.deleteButton:hover {
+    background-color: #c43a3c;
+}
+.formContainer {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.formSpeciality {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Adaptado de .itmSpeciality a .itmMedicine */
+.itmMedicine {
+    display: flex;
+    flex-direction: column;
+}
+
+.itmMedicine label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.3rem;
+}
+
+.itmMedicine input,
+.itmMedicine textarea {
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.itmMedicine input:focus,
+.itmMedicine textarea:focus {
+    border-color: #0077cc;
+    box-shadow: 0 0 0 2px rgba(0, 119, 204, 0.2);
+    outline: none;
+}
+
+.addButton {
+    background-color: #0077cc;
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 0 auto;
+}
+
+.addButton:hover {
+    background-color: #025d9e;
+}
+
+.editButton {
+    background-color: #ffc107;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 0 auto;
+}
+
+.editButton:hover {
+    background-color: #e0a800;
+}
+.displayForm{
+    margin-top: 20px;
+    background-color: #0077cc;
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}

@@ -41,7 +41,7 @@
           <span class="dashDoctor" style="font-size: 150%" (click)="doctorDashboard()">Dashboard Médico</span>
         }
         @else if (rol==='ROL_RECEPCIONISTA') {
-          <span class="optionItem" style="font-size: 150%" (click)="goTo('recepcionista')">Dashboard Recepcionista</span>
+          <span class="optionItem" style="font-size: 150%" (click)="recepcionistaDashboard()">Dashboard Recepcionista</span>
         }
         @else {
           <span class="unlogedItem" style="font-size: 150%" (click)="unlogedDashboard()">Registrar cita</span>

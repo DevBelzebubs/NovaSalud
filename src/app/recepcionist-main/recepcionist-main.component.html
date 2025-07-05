@@ -1,3 +1,70 @@
+<app-top-bar></app-top-bar>
 <div class="appContainer">
     <h1>Gestión de productos</h1>
+    <div class="tableContainer">
+        <table class="medicineTable">
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Fecha ingreso</th>
+                <th>Fecha vencimiento</th>
+                <th>Precio unitario</th>
+                <th>Acciones</th>
+            </tr>
+            @for (item of medicines; track $index){
+                <tr>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.descripcion}}</td>
+                    <td>{{item.cantidad}}</td>
+                    <td>{{item.fecha_ingreso}}</td>
+                    <td>{{item.fecha_vencimiento}}</td>
+                    <td>{{item.precio_unitario}}</td>
+                    <td>
+                        <div class="tableButtons">
+                            <button class="editButton" (click)="getMedicineByID(item.id)">Edit</button>
+                            <button class="deleteButton" (click)="deleteMedicine(item.id)">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+        <div>
+          <button class="displayForm" (click)="toggleForm()">+</button>
+        </div>
+        @if (medicineForm){
+        <div class="formContainer">
+          <h1 *ngIf="!isEditing">Añadir medicamento</h1>
+          <h1 *ngIf="isEditing">Editar medicamento</h1>
+            <form [formGroup]="formMedicine" class="formSpeciality" id="formMedicine">
+                <div class="itmMedicine">
+                    <label for="nombre">Nombre:</label>
+                    <input id="nombre" type="text" placeholder="Nombre..." formControlName="name">
+                </div>
+                <div class="itmMedicine">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" placeholder="Descripción..." formControlName="description"></textarea>
+                </div>
+                <div class="itmMedicine">
+                    <label for="fecha_ingreso">Fecha de ingreso:</label>
+                    <input id="fecha_ingreso" type="date" formControlName="date_entry">
+                </div>
+                <div class="itmMedicine">
+                    <label for="fecha_vencimiento">Fecha de vencimiento:</label>
+                    <input id="fecha_vencimiento" type="date" formControlName="expiration_date">
+                </div>
+                <div class="itmMedicine">
+                    <label for="cantidad">Cantidad:</label>
+                    <input id="cantidad" type="number" placeholder="Cantidad..." formControlName="quantity">
+                </div>
+                <div class="itmMedicine">
+                    <label for="precio_unitario">Precio unitario:</label>
+                    <input id="precio_unitario" type="number" step="0.01" placeholder="Precio..." formControlName="unit_price">
+                </div>
+                <button class="addButton" *ngIf="!isEditing" (click)="addMedicine()">Añadir</button>
+                <button class="editButton" *ngIf="isEditing" (click)="editMedicine()">Guardar cambios</button>
+            </form>
+        </div>
+        }
+    </div>
 </div>
