@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class RecepcionistServiceService {
-  url = 'http://localhost:8080/api/recepcionista';
+  url = 'https://api-hospital-novasalud-aebedqh3cfcrgfc8.ukwest-01.azurewebsites.net/api/recepcionista';
   constructor(private httpClient:HttpClient){}
   addReceptionist(recepcionist: recepcionist) {
     return this.httpClient.post<recepcionist>(this.url + '/registrar', recepcionist);

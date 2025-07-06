@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TopBarComponent } from "../top-bar/top-bar.component";
 import { medicine } from '../../models/medicine';
-import { MedicineServiceService } from '../medicine-service.service';
+import { MedicineServiceService } from '../../services/medicine-service.service';
 import { Form, FormBuilder,FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';

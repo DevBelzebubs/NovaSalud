@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TopBarComponent } from "../top-bar/top-bar.component";
 import { prescription } from '../../models/prescription';
 import { appointment } from '../../models/appointment';
-import { PatientServiceService } from '../patient-service.service';
+import { PatientServiceService } from '../../services/patient-service.service';
 
 @Component({
   selector: 'app-historial-citas',

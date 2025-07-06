@@ -58,3 +58,64 @@
 .listscheduleContainer{
     margin-top: 10vh;
 }
+.listscheduleContainer {
+    max-width: 600px;
+    margin: 2rem auto;
+    background-color: #ffffff;
+    padding: 2rem;
+    padding-top: 0.5vh;
+    margin-top: 12vh;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 60, 120, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.listscheduleContainer h1 {
+    text-align: center;
+    color: #005a9c;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.listSchedule {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.scheduleItem {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9fbfd;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 60, 120, 0.05);
+    transition: background-color 0.3s;
+}
+
+.scheduleItem:hover {
+    background-color: #e6f2ff;
+}
+
+.scheduleItem span {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0.3rem 0;
+}
+
+.scheduleItem button {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    align-self: center;
+    margin-top: 1rem;
+}
+
+.scheduleItem button:hover {
+    background-color: #c43a3c;
+}

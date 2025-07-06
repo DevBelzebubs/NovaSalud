@@ -16,9 +16,9 @@
         <div class="listSchedule">
             @for (item of scheduleList; track $index){
                 <div class="scheduleItem">
-                    <span>{{item.localDate}}</span>
-                    <span class="scheduleDate">{{ item.horaInicio | date: 'dd/MM/yyyy' }}</span>
-                    <span class="scheduleTime">{{ item.horaFin | date: 'shortTime' }}</span>
+                    <span>Fecha: {{item.fecha}}</span>
+                    <span class="scheduleDate">Desde: {{ item.horaInicio}}</span>
+                    <span class="scheduleTime">Hasta: {{ item.horaFin }}</span>
                     <button (click)="deleteSchedule(item.id)">Eliminar</button>
                 </div>
             }

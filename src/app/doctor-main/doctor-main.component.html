@@ -5,11 +5,96 @@
         <button class="salirbtn" (click)="salir()">Salir</button>
     </div>
     <div class="citasContainer">
-        <h4>Citas registradas:</h4>
+        <h2>Citas registradas</h2>
         <div class="citasMain">
-            @for (item of citas; track $index){
-                
+            @for (item of citasDoctor; track $index){
+                <div class="citaContainer" (click)="abrirFormularioFinalizar(item)">
+                    <div class="citaInfo">
+                        <h3>{{ item.doctor }}</h3>
+                        <p><strong>Paciente:</strong> {{ item.paciente }}</p>
+                        <p><strong>Fecha:</strong> {{ item.fechaCita}}</p>
+                        <p><strong>Hora:</strong> {{ item.horaCita }}</p>
+                    </div>
+                    <div class="citaActions">
+                        <button class="deleteButton" (click)="eliminarCita(item.id)">Eliminar</button>
+                    </div>
+                </div>
             }
         </div>
     </div>
+   @if (citaSeleccionada) {
+  <div class="selectedCita">
+    <h3 class="selectedCitaTitle">
+      Gestionar cita con {{ citaSeleccionada.paciente }}
+    </h3>
+    <div class="selectedCitaField">
+      <label for="descripcion">Descripción de la receta:</label>
+      <textarea
+        id="descripcion"
+        [(ngModel)]="descripcionReceta"
+        placeholder="Escribe la descripción"
+      ></textarea>
+    </div>
+    <div class="selectedCitaField">
+      <label for="medicamentos">Seleccionar medicamentos:</label>
+      <select [ngModel]="null" (ngModelChange)="agregarMedicamento($event)">
+        <option [ngValue]="null" disabled selected>
+          Seleccione un medicamento
+        </option>
+        @for (med of listMedicamentos; track med.id) {
+          <option [ngValue]="med">
+            {{ med.nombre }} (S/. {{ med.precio }}) - Stock: {{ med.stock }}
+          </option>
+        }
+      </select>
+    </div>
+    @if (medicamentosSeleccionados.length > 0) {
+      <table class="tabla-medicamentos">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Precio Unitario</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (med of medicamentosSeleccionados; track med.id) {
+            <tr>
+              <td>{{ med.nombre }}</td>
+              <td>S/. {{ med.precio }}</td>
+              <td>
+                <button
+                    type="button"
+                  (click)="decrementarCantidad(med)"
+                  [disabled]="med.cantidad === 1"
+                >-</button>
+                {{ med.cantidad }}
+                <button
+                    type="button"
+                  (click)="incrementarCantidad(med)"
+                  [disabled]="med.cantidad >= med.stockDisponible"
+                >+</button>
+              </td>
+              <td>S/. {{ med.subtotal }}</td>
+              <td>
+                <button (click)="eliminarMedicamento(med)">Eliminar</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+    @if (totalReceta > 0) {
+      <div class="total-receta">
+        <strong>Total: S/. {{ totalReceta }}</strong>
+      </div>
+    }
+    <button class="finalizarCitaButton" (click)="finalizarCita()">
+      Finalizar Cita
+    </button>
+  </div>
+}
+
 </div>

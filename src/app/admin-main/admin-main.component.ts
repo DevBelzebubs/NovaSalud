@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { TopBarComponent } from "../top-bar/top-bar.component";
 import { Router } from '@angular/router';
-import { SpecialityServiceService } from '../speciality-service.service';
+import { SpecialityServiceService } from '../../services/speciality-service.service';
 import { Form, FormBuilder,FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { speciality } from '../../models/speciality';
 import { errorContext } from 'rxjs/internal/util/errorContext';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
 import {} from 'sweetalert2'
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-main',
@@ -71,17 +72,27 @@ export class AdminMainComponent {
       formData.speciality
     )
     this.specialityService.addSpeciality(specialities).subscribe({
-      next: (registerSpeciality) =>{
-        console.log(registerSpeciality);
-        console.log(JSON.stringify(registerSpeciality));
-        this.listSpeciality();
-        this.formSpeciality.reset();
-      },
-      error: (err) =>{
-        console.error(err);
-        this.listSpeciality();
-      }
-    });
+    next: (registerSpeciality) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Especialidad registrada',
+        text: 'La especialidad fue registrada exitosamente.',
+        confirmButtonText: 'Aceptar'
+      });
+      this.listSpeciality();
+      this.formSpeciality.reset();
+    },
+    error: (err) => {
+      console.error(err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No se pudo registrar la especialidad.',
+        confirmButtonText: 'Cerrar'
+      });
+      this.listSpeciality();
+    }
+  });
   }
   startEditSpeciality(id?: number) {
   if (id == null) {

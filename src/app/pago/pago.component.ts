@@ -5,10 +5,10 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { TopBarComponent } from "../top-bar/top-bar.component";
 import { ReactiveFormsModule } from '@angular/forms';
-import { AppointmentSharedServiceService } from '../appointment-shared-service.service';
-import { AppointmentServiceService } from '../appointment-service.service';
-import { AppointmentsDto } from '../interfaces/appointmentsDto';
-import { PatientServiceService } from '../patient-service.service';
+import { AppointmentSharedServiceService } from '../../services/appointment-shared-service.service';
+import { AppointmentServiceService } from '../../services/appointment-service.service';
+import { AppointmentsDto } from '../dtos/appointmentsDto';
+import { PatientServiceService } from '../../services/patient-service.service';
 @Component({
   selector: 'app-pago',
   imports: [CommonModule, FormsModule, TopBarComponent,ReactiveFormsModule],
@@ -82,27 +82,47 @@ export class PagoComponent {
       }
     });
     setTimeout(() => {
-      this.pacienteService.registrarCita(this.appointmentToRegister).subscribe({
-        next: (response) => {
-          console.log('Cita registrada correctamente', response);
-          Swal.fire({
-            title: '¡Pago exitoso!',
-            text: 'Tu cita ha sido registrada correctamente.',
-            icon: 'success'
-          }).then(() => {
-            this.appointmentSharedService.clearAppointment();
-            this.route.navigate(['/']);
-          });
-        },
-        error: (error) => {
-          console.error('Error al registrar la cita:', error);
-          Swal.fire({
-            title: 'Error al registrar la cita',
-            text: 'Inténtelo nuevamente más tarde.',
-            icon: 'error'
-          });
-        }
-      });
-    }, 1500);
+    this.pacienteService.registrarCita(this.appointmentToRegister!).subscribe({
+      next: (res) => {
+        console.log('Cita registrada correctamente:', res);
+        const resId = res.id;
+        console.log(res.id);
+        this.pacienteService.registrarBoletaParaCita(resId!).subscribe({
+          next: (boleta) => {
+            console.log('Boleta registrada correctamente:', boleta);
+            Swal.fire({
+              title: '¡Pago exitoso!',
+              html: `
+                <p>Tu cita ha sido registrada correctamente.</p>
+                <p><strong>Boleta N°:</strong> ${boleta.id}</p>
+                <p><strong>Monto:</strong> S/. ${boleta.monto}</p>
+                <p><strong>Fecha:</strong> ${boleta.fecha}</p>
+              `,
+              icon: 'success'
+            }).then(() => {
+              this.appointmentSharedService.clearAppointment();
+              this.route.navigate(['/']);
+            });
+          },
+          error: (err) => {
+            console.error('Error al generar la boleta:', err);
+            Swal.fire({
+              title: 'Error al generar la boleta',
+              text: 'La cita se registró, pero hubo un problema con la boleta.',
+              icon: 'warning'
+            });
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Error al registrar la cita:', err);
+        Swal.fire({
+          title: 'Error al registrar la cita',
+          text: 'No se pudo completar el registro de la cita. Inténtelo de nuevo.',
+          icon: 'error'
+        });
+      }
+    });
+  }, 1500);
   }
 }

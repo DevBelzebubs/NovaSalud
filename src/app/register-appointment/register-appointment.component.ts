@@ -11,19 +11,19 @@ import {
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { speciality } from '../../models/speciality';
-import { SpecialityServiceService } from '../speciality-service.service';
+import { SpecialityServiceService } from '../../services/speciality-service.service';
 import { doctor } from '../../models/doctor';
-import { DoctorServiceService } from '../doctor-service.service';
-import { UserServiceService } from '../user-service.service';
+import { DoctorServiceService } from '../../services/doctor-service.service';
+import { UserServiceService } from '../../services/user-service.service';
 import { user } from '../../models/user';
-import { DoctorDto } from '../interfaces/doctorDto';
-import { AppointmentServiceService } from '../appointment-service.service';
+import { DoctorDto } from '../dtos/doctorDto';
+import { AppointmentServiceService } from '../../services/appointment-service.service';
 import { appointment } from '../../models/appointment';
 import { Schedule } from '../../models/schedule';
-import { ScheduleServiceService } from '../shedule-service.service';
-import { PatientServiceService } from '../patient-service.service';
-import { AppointmentsDto } from '../interfaces/appointmentsDto';
-import { AppointmentSharedServiceService } from '../appointment-shared-service.service';
+import { ScheduleServiceService } from '../../services/shedule-service.service';
+import { PatientServiceService } from '../../services/patient-service.service'; 
+import { AppointmentsDto } from '../dtos/appointmentsDto';
+import { AppointmentSharedServiceService } from '../../services/appointment-shared-service.service';
 @Component({
   selector: 'app-register-appointment',
   imports: [TopBarComponent, ReactiveFormsModule, FormsModule, CommonModule],
@@ -111,15 +111,28 @@ export class RegisterAppointmentComponent {
   onDoctorSelected(event: Event) {
   const target = event.target as HTMLSelectElement;
   const doctorId = target?.value;
-  
+
   if (!doctorId) {
     this.availableDates = [];
     return;
   }
+
   const idNumber = +doctorId;
   this.appointmentForm.get('doctor.id')?.setValue(idNumber);
-  this.loadAvailableSchedules();
+
+  this.loadAvailableSchedulesByDoctor(idNumber);
 }
+  loadAvailableSchedulesByDoctor(doctorId: number) {
+    this.doctorService.listarHorariosPorDoctor(doctorId).subscribe({
+      next: (data: Schedule[]) => {
+        this.availableDates = data;
+        console.log('Horarios disponibles para doctor:', this.availableDates);
+      },
+      error: (error) => {
+      console.error('Error fetching schedules for doctor:', error);
+      },
+    });
+  }
 
   onHorarioSelected(event: Event) {
   const selectElement = event.target as HTMLSelectElement;

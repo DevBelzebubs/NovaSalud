@@ -1,12 +1,12 @@
 import { Component,OnInit } from '@angular/core';
 import { FormBuilder, FormGroup,ReactiveFormsModule,Validator, Validators } from '@angular/forms';
-import { DoctorServiceService } from '../doctor-service.service';
+import { DoctorServiceService } from '../../services/doctor-service.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { doctor } from '../../models/doctor';
 import { user } from '../../models/user';
 import { speciality } from '../../models/speciality';
-import { SpecialityServiceService } from '../speciality-service.service';
+import { SpecialityServiceService } from '../../services/speciality-service.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 @Component({

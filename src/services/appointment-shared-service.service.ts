@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AppointmentsDto } from './interfaces/appointmentsDto';
+import { AppointmentsDto } from '../app/dtos/appointmentsDto';
 @Injectable({
   providedIn: 'root'
 })

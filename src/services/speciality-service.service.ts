@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SpecialityServiceService {
-  url = 'http://localhost:8080/api/especialidades';
+  url = 'https://api-hospital-novasalud-aebedqh3cfcrgfc8.ukwest-01.azurewebsites.net/api/especialidades';
   constructor(private httpClient:HttpClient){}
   listSpeciality(){
     console.log("Fetching specialities from: " + this.url);

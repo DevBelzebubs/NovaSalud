@@ -2,10 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl,FormGroup,FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ScheduleServiceService } from '../shedule-service.service';
+import { ScheduleServiceService } from '../../services/shedule-service.service';
 import { Schedule } from '../../models/schedule';
 import Swal from 'sweetalert2';
-import { DoctorServiceService } from '../doctor-service.service';
+import { DoctorServiceService } from '../../services/doctor-service.service';
+import { Pipe } from '@angular/core';
+import { CitaMedicaDto } from '../dtos/citaMedicaDto';
 @Component({
   selector: 'app-doctor-register',
   imports: [ReactiveFormsModule,CommonModule],
@@ -14,7 +16,8 @@ import { DoctorServiceService } from '../doctor-service.service';
 })
 export class DoctorRegisterComponent {
   doctorRegisterForm!:FormGroup;
-  scheduleList!: any[];
+  scheduleList!: Schedule[];
+  citasDoctor:CitaMedicaDto[] = [];
   constructor(private fb:FormBuilder, private route:Router,private scheduleService:ScheduleServiceService, private doctorService:DoctorServiceService){}
   onSubmit(){
     const formData = this.doctorRegisterForm.value;
@@ -59,7 +62,11 @@ export class DoctorRegisterComponent {
       }
     });
   }
-  deleteSchedule(id:number){
+  deleteSchedule(id?:number){
+    if(id===undefined){
+      console.error("No schedule ID provided");
+      return;
+    }
     this.scheduleService.eliminarHorario(id).subscribe({
       next: (response) => {
         console.log('Schedule deleted successfully:', response);

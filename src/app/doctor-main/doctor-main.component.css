@@ -35,3 +35,203 @@
     background-color: #c93241;
     transition: background-color 0.4s;
 }
+.citasContainer {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 60, 120, 0.1);
+    margin-top: 2rem;
+}
+
+.citasContainer h2 {
+    text-align: center;
+    color: #005a9c;
+    margin-bottom: 1.5rem;
+}
+
+.citasMain {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.citaContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9fbfd;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 60, 120, 0.05);
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.citaContainer:hover {
+    background-color: #e6f2ff;
+}
+
+.citaInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.citaInfo h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #005a9c;
+}
+
+.citaInfo p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.citaActions button {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.citaActions button:hover {
+    background-color: #c43a3c;
+}
+.selectedCita {
+    max-width: 600px;
+    margin: 2rem auto;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 60, 120, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.selectedCitaTitle {
+    text-align: center;
+    color: #005a9c;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+.selectedCitaField {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.selectedCitaField label {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.selectedCitaField textarea,
+.selectedCitaField select {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    resize: vertical;
+}
+
+.selectedCitaField textarea:focus,
+.selectedCitaField select:focus {
+    border-color: #0077cc;
+    box-shadow: 0 0 0 2px rgba(0, 119, 204, 0.2);
+    outline: none;
+}
+
+.finalizarCitaButton {
+    background-color: #0077cc;
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    align-self: center;
+}
+
+.finalizarCitaButton:hover {
+    background-color: #025d9e;
+}
+.tabla-medicamentos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    background-color: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 60, 120, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.tabla-medicamentos thead {
+    background-color: #0077cc;
+    color: white;
+}
+
+.tabla-medicamentos th,
+.tabla-medicamentos td {
+    padding: 1rem;
+    font-size: 1.1rem;
+    text-align: center;
+    border-bottom: 1px solid #d6e4f0;
+}
+
+.tabla-medicamentos tr:hover td {
+    background-color: #e6f2ff;
+}
+
+.tabla-medicamentos td button {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+
+.tabla-medicamentos td button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.tabla-medicamentos td button:not(:disabled) {
+    background-color: #0077cc;
+    color: white;
+}
+
+.tabla-medicamentos td button:not(:disabled):hover {
+    background-color: #025d9e;
+}
+
+.tabla-medicamentos td:last-child button {
+    background-color: #ff4d4f;
+    color: white;
+}
+
+.tabla-medicamentos td:last-child button:hover {
+    background-color: #c43a3c;
+}
+
+.total-receta {
+    margin-top: 1.5rem;
+    text-align: right;
+    font-size: 1.3rem;
+    color: #005a9c;
+    font-weight: bold;
+}

@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -68,9 +68,31 @@ export class LoginComponent {
       },
       error: (error) => {
         console.error('Error during login:', error);
-        alert('Login failed. Please check your credentials.');
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudo iniciar sesión. Por favor verifica tus credenciales.',
+          icon: 'error'
+      });
       },
     });
+  }else{
+    let errorMessage = '';
+    const controls = this.loginForm.controls;
+    if (controls['rol'].hasError('required')) {
+      errorMessage += '- Debe seleccionar un rol.<br/>';
+    }
+    if (controls['username'].hasError('required')) {
+      errorMessage += '- El nombre de usuario es obligatorio.<br/>';
+    }
+    if (controls['password'].hasError('required')) {
+      errorMessage += '- La contraseña es obligatoria.<br/>';
+    }
+    Swal.fire({
+      title: 'Error en el formulario',
+      html: errorMessage,
+      icon: 'error'
+    });
+    return;
   }
 }
 onRegister(){

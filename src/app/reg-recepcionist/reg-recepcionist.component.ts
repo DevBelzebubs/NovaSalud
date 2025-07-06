@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule,FormGroup, Form, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { recepcionist } from '../../models/recepcionist';
-import { RecepcionistServiceService } from '../recepcionist-service.service';
+import { RecepcionistServiceService } from '../../services/recepcionist-service.service';
 import { user } from '../../models/user';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-reg-recepcionist',
   standalone:true,
@@ -41,11 +42,23 @@ export class RegRecepcionistComponent {
   );
   this.recepcionistService.addReceptionist(newReceptionist).subscribe({
     next: () => {
-      console.log("Recepcionista registrado con éxito");
-      this.route.navigate(['/admin']);
+      Swal.fire({
+        icon: 'success',
+        title: 'Recepcionista registrado',
+        text: 'El recepcionista fue registrado con éxito.',
+        confirmButtonText: 'Aceptar'
+      }).then(() => {
+        this.route.navigate(['/admin']);
+      });
     },
     error: (err) => {
       console.error("Error al registrar recepcionista:", err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No se pudo registrar el recepcionista.',
+        confirmButtonText: 'Cerrar'
+      });
     }
   });
 }

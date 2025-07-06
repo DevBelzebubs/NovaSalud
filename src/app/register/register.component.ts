@@ -5,8 +5,8 @@ import { CommonModule } from '@angular/common';
 import { user } from '../../models/user';
 import { patient } from '../../models/patient';
 import { doctor } from '../../models/doctor';
-import { PatientServiceService } from '../patient-service.service';
-import { UserServiceService } from '../user-service.service';
+import { PatientServiceService } from '../../services/patient-service.service';
+import { UserServiceService } from '../../services/user-service.service';
 import { switchMap } from 'rxjs';
 import { Role } from '../../models/role';
 import Swal from 'sweetalert2';
@@ -32,8 +32,42 @@ export class RegisterComponent {
     });
   }
   onRegister() {
-  const formData = this.registerForm.value;
+    if(this.registerForm.invalid){
+    let errorMessage = '';
+    const controls = this.registerForm.controls;
+    if (controls['nombre'].hasError('required')) {
+      errorMessage += '- El nombre es obligatorio.<br/>';
+    }
+    if (controls['apellido'].hasError('required')) {
+      errorMessage += '- El apellido es obligatorio.<br/>';
+    }
+    if (controls['dni'].hasError('required')) {
+      errorMessage += '- El DNI es obligatorio.<br/>';
+    } else if (controls['dni'].hasError('pattern')) {
+      errorMessage += '- El DNI debe tener exactamente 8 dígitos numéricos.<br/>';
+    }
+    if (controls['numero'].hasError('required')) {
+      errorMessage += '- El número es obligatorio.<br/>';
+    } else if (controls['numero'].hasError('pattern')) {
+      errorMessage += '- El número debe tener exactamente 9 dígitos numéricos.<br/>';
+    }
+    if (controls['password'].hasError('required')) {
+      errorMessage += '- La contraseña es obligatoria.<br/>';
+    } else if (controls['password'].hasError('minlength') || controls['password'].hasError('maxlength')) {
+      errorMessage += '- La contraseña debe tener entre 6 y 20 caracteres.<br/>';
+    }
+    if (controls['sexo'].hasError('required')) {
+      errorMessage += '- Debe seleccionar el sexo.<br/>';
+    }
+    Swal.fire({
+      title: 'Error en el formulario',
+      html: errorMessage,
+      icon: 'error'
+    });
 
+    return;
+  }
+  const formData = this.registerForm.value;
   const newPatient = new patient(
     undefined,
     formData.dni,
@@ -43,7 +77,6 @@ export class RegisterComponent {
     formData.numero,
     formData.sexo
   );
-
   this.patientService.addPatient(newPatient).subscribe({
     next: (registeredPatient) => {
       console.log('Paciente registrado correctamente', registeredPatient);

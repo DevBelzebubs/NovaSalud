@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import {ActivatedRoute, Route, Router} from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -50,7 +50,7 @@ export class TopBarComponent {
     this.route.navigate(['/admin']);
   }
   doctorDashboard(){
-    this.route.navigate(['/medico']);
+    this.route.navigate(['/doctor']);
   
   }
   recepcionistaDashboard(){
