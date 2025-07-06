@@ -45,6 +45,47 @@ export class PagoComponent {
       });
       this.route.navigate(['/citas']);
     }
+    this.paymentForm = this.fb.group({
+    cardHolder: ['', Validators.required],
+    cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
+    expiryDate: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]],
+    cvv: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
+  });
+  }
+  formatExpiryDate() {
+    const control = this.paymentForm.get('expiryDate');
+    let value = control?.value || '';
+    value = value.replace(/\D/g, '');
+    if (value.length > 2) {
+      value = value.slice(0, 2) + '/' + value.slice(2, 4);
+    }
+    if (value.length > 5) {
+      value = value.slice(0, 5);
+    }
+    control?.setValue(value, { emitEvent: false });
+  }
+  formatCardNumber() {
+    const control = this.paymentForm.get('cardNumber');
+    let value = control?.value || '';
+    value = value.replace(/\D/g, '');
+
+    if (value.length > 16) {
+      value = value.slice(0, 16);
+    }
+    value = value.replace(/(.{4})/g, '$1 ').trim();
+    control?.setValue(value, { emitEvent: false });
+  }
+  formatCVV() {
+    const control = this.paymentForm.get('cvv');
+    let value = control?.value || '';
+    value = value.replace(/\D/g, '');
+    if (value.length > 3) {
+      value = value.slice(0, 3);
+    }
+    control?.setValue(value, { emitEvent: false });
+  }
+  back(){
+    this.route.navigate(['/citas'])
   }
   loadMercadoPago(){
     const script = document.createElement('script');
@@ -73,6 +114,41 @@ export class PagoComponent {
       });
       return;
     }
+    if (this.selectedMethod === 'card') {
+    if (this.paymentForm.invalid) {
+      let errorMessage = '';
+
+      const controls = this.paymentForm.controls;
+
+      if (controls['cardHolder'].hasError('required')) {
+        errorMessage += '- El nombre del titular es obligatorio.<br/>';
+      }
+
+      if (controls['cardNumber'].hasError('required')) {
+        errorMessage += '- El número de tarjeta es obligatorio.<br/>';
+      } else if (controls['cardNumber'].hasError('pattern')) {
+        errorMessage += '- El número de tarjeta debe tener 16 dígitos numéricos.<br/>';
+      }
+
+      if (controls['expiryDate'].hasError('required')) {
+        errorMessage += '- La fecha de expiración es obligatoria.<br/>';
+      } else if (controls['expiryDate'].hasError('pattern')) {
+        errorMessage += '- La fecha de expiración debe tener el formato MM/AA.<br/>';
+      }
+      if (controls['cvv'].hasError('required')) {
+        errorMessage += '- El CVV es obligatorio.<br/>';
+      } else if (controls['cvv'].hasError('pattern')) {
+        errorMessage += '- El CVV debe tener 3 dígitos numéricos.<br/>';
+      }
+      Swal.fire({
+        title: 'Error en los datos de tarjeta',
+        html: errorMessage,
+        icon: 'error'
+      });
+
+      return;
+    }
+  }
     Swal.fire({
       title: 'Procesando pago...',
       text: 'Por favor, espera',

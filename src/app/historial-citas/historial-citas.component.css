@@ -54,3 +54,28 @@ h1{
     padding: 1rem;
     min-height: 80px;
 }
+
+.downloadPDF {
+    background-color: #0077cc;
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s, transform 0.2s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: auto;
+}
+
+.downloadPDF:hover {
+    background-color: #025d9e;
+    transform: translateY(-1px);
+}
+.downloadContainer {
+    text-align: center;
+    margin-top: 2rem;
+}

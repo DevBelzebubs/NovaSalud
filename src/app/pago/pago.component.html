@@ -22,14 +22,15 @@
   </div>
 
   <div class="step" *ngIf="selectedMethod === 'card'">
-    <h2>Datos de tarjeta</h2>
-    <input type="text" placeholder="Nombre del titular" class="inputField">
-    <input type="text" placeholder="Número de tarjeta" class="inputField">
-    <input type="text" placeholder="Fecha de expiración (MM/AA)" class="inputField">
-    <input type="text" placeholder="CVV" class="inputField">
-    <button class="primaryButton" (click)="onConfirmPayment()">Pagar</button>
-  </div>
-
+  <h2>Datos de tarjeta</h2>
+  <form [formGroup]="paymentForm">
+    <input type="text" placeholder="Nombre del titular" class="inputField" formControlName="cardHolder">
+    <input type="text" placeholder="Número de tarjeta" class="inputField" formControlName="cardNumber" (input)="formatCardNumber()">
+    <input type="text" placeholder="Fecha de expiración (MM/AA)" class="inputField" formControlName="expiryDate" (input)="formatExpiryDate()">
+    <input type="text" placeholder="CVV" class="inputField" formControlName="cvv" (input)="formatCVV()">
+  </form>
+  <button class="primaryButton" (click)="onConfirmPayment()">Pagar</button>
+</div>
   <div class="step" *ngIf="selectedMethod === 'yape'">
     <h2>Paga con Yape</h2>
     <p>Escanea este código QR o paga al número <strong>960 662 079</strong></p>
@@ -42,4 +43,5 @@
     <h2>Pagar con Mercado Pago</h2>
     <div id="wallet_container"></div>
   </div>
+  <button (click)="back()" class="btnBack">Atrás</button>
 </div>

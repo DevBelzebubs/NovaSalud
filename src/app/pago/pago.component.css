@@ -1,7 +1,7 @@
 .appContainer {
   background-color: #f1f7fe;
   width: 100%;
-  min-height: 100vh; /* Ocupa toda la altura visible */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,4 +75,21 @@
     padding: 20px 15px;
     max-width: 100%;
   }
+}
+.btnBack {
+    background-color: #ff4d4f;
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 4vh;
+}
+
+.btnBack:hover {
+    background-color: #c43a3c;
+    transform: translateY(-1px);
 }
