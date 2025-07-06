@@ -23,6 +23,6 @@ export class SpecialityServiceService {
     return this.httpClient.put<speciality>(this.url + `/actualizar/${id}`, speciality);
   }
   getSpeciality(id: number): Observable<speciality> {
-    return this.httpClient.get<speciality>(this.url + `/${id}`);
+    return this.httpClient.get<speciality>(this.url + `/listar/${id}`);
   }
 }

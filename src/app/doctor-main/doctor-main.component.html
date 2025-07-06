@@ -77,7 +77,7 @@
                   [disabled]="med.cantidad >= med.stockDisponible"
                 >+</button>
               </td>
-              <td>S/. {{ med.subtotal }}</td>
+              <td>{{ med.subtotal | currency:'PEN'  }}</td>
               <td>
                 <button (click)="eliminarMedicamento(med)">Eliminar</button>
               </td>
@@ -88,7 +88,7 @@
     }
     @if (totalReceta > 0) {
       <div class="total-receta">
-        <strong>Total: S/. {{ totalReceta }}</strong>
+        <strong>Total: S/. {{ totalReceta | currency:'PEN' }}</strong>
       </div>
     }
     <button class="finalizarCitaButton" (click)="finalizarCita()">

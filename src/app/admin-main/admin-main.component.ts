@@ -99,21 +99,35 @@ export class AdminMainComponent {
     alert("ID no válido");
     return;
   }
+
+  this.specilityForm = true;
+  this.isEditing = true;
+  this.editId = id;
+
   this.specialityService.getSpeciality(id).subscribe({
     next: (data) => {
-      this.formSpeciality.patchValue({
-        name: data.nombre,
-        speciality: data.descripcion
-      });
-      this.isEditing = true;
-      this.editId = id;
-      this.specilityForm = true;
-      setTimeout(() => {
+      console.log('Respuesta del backend:', data);
+      
+      if (Array.isArray(data) && data.length > 0) {
+        const especialidad = data[0];
+        this.formSpeciality.patchValue({
+          name: especialidad.nombre,
+          speciality: especialidad.descripcion
+        });
+        setTimeout(() => {
         const formElement = document.getElementById('formSpeciality');
         if (formElement) {
           formElement.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
+      } else {
+        Swal.fire({
+          title: 'No encontrado',
+          text: 'No se encontró la especialidad solicitada.',
+          icon: 'warning',
+          confirmButtonText: 'Aceptar'
+        });
+      }
     },
     error: (error) => {
       console.error("Error al cargar especialidad:", error);
@@ -121,6 +135,8 @@ export class AdminMainComponent {
     }
   });
 }
+
+
 
 saveEditSpeciality() {
   if (this.editId == null) {
