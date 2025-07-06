@@ -124,22 +124,40 @@ export class AdminMainComponent {
 
 saveEditSpeciality() {
   if (this.editId == null) {
-    alert("ID de edición no válido");
+    Swal.fire({
+      title: 'ID inválido',
+      text: 'ID de edición no válido.',
+      icon: 'error',
+      confirmButtonText: 'Aceptar'
+    });
     return;
   }
+
   if (!this.formSpeciality.valid) {
-    alert("Completa todos los campos requeridos.");
+    Swal.fire({
+      title: 'Campos incompletos',
+      text: 'Completa todos los campos requeridos.',
+      icon: 'warning',
+      confirmButtonText: 'Aceptar'
+    });
     return;
   }
+
   const formData = this.formSpeciality.value;
   const editedSpeciality = new speciality(
     this.editId,
     formData.name,
     formData.speciality
   );
+
   this.specialityService.editSpeciality(this.editId, editedSpeciality).subscribe({
     next: (data) => {
-      alert("Especialidad actualizada correctamente");
+      Swal.fire({
+        title: '¡Éxito!',
+        text: 'Especialidad actualizada correctamente.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      });
       this.listSpeciality();
       this.formSpeciality.reset();
       this.isEditing = false;
@@ -153,9 +171,19 @@ saveEditSpeciality() {
         for (const key in error.error) {
           mensaje += `${key}: ${error.error[key]}\n`;
         }
-        alert(mensaje);
+        Swal.fire({
+          title: 'Error de validación',
+          text: mensaje,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
       } else {
-        alert("Error inesperado");
+        Swal.fire({
+          title: 'Error inesperado',
+          text: 'Ocurrió un error al actualizar la especialidad.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
       }
     }
   });

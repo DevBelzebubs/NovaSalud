@@ -4,6 +4,7 @@
     <div *ngIf="appointmentToRegister">
       <p><strong>Doctor ID:</strong> {{ appointmentToRegister.doctorId }}</p>
       <p><strong>Horario ID:</strong> {{ appointmentToRegister.horaCita }}</p>
+      <h2>Costo general de consulta: S./50</h2>
     </div>
     <div *ngIf="!appointmentToRegister">
       <p>No hay datos de cita para procesar el pago.</p>

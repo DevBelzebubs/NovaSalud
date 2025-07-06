@@ -32,9 +32,10 @@ export class RegisterComponent {
     });
   }
   onRegister() {
-    if(this.registerForm.invalid){
+  if (this.registerForm.invalid) {
     let errorMessage = '';
     const controls = this.registerForm.controls;
+
     if (controls['nombre'].hasError('required')) {
       errorMessage += '- El nombre es obligatorio.<br/>';
     }
@@ -59,14 +60,16 @@ export class RegisterComponent {
     if (controls['sexo'].hasError('required')) {
       errorMessage += '- Debe seleccionar el sexo.<br/>';
     }
+
     Swal.fire({
       title: 'Error en el formulario',
       html: errorMessage,
-      icon: 'error'
+      icon: 'error',
+      confirmButtonText: 'Aceptar'
     });
-
     return;
   }
+
   const formData = this.registerForm.value;
   const newPatient = new patient(
     undefined,
@@ -77,6 +80,7 @@ export class RegisterComponent {
     formData.numero,
     formData.sexo
   );
+
   this.patientService.addPatient(newPatient).subscribe({
     next: (registeredPatient) => {
       console.log('Paciente registrado correctamente', registeredPatient);
@@ -84,12 +88,39 @@ export class RegisterComponent {
         title: '¡Registro exitoso!',
         text: 'El paciente ha sido registrado correctamente.',
         icon: 'success',
+        confirmButtonText: 'Aceptar'
       });
       this.registerForm.reset();
       this.route.navigate(['']);
     },
     error: (err) => {
       console.error('Error al registrar paciente:', err);
+
+      let errorMessage = 'Ocurrió un error al registrar el paciente. Por favor, inténtalo de nuevo.';
+
+      if (err.status === 400 || err.status === 409) {
+        if (err.error && typeof err.error === 'string') {
+          errorMessage = err.error;
+        } else if (err.error && err.error.message) {
+          errorMessage = err.error.message;
+        } else {
+          errorMessage = 'El paciente ya existe o los datos son inválidos.';
+        }
+
+        Swal.fire({
+          title: 'Error de registro',
+          text: errorMessage,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      } else {
+        Swal.fire({
+          title: 'Error inesperado',
+          text: errorMessage,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
     }
   });
 }
