@@ -55,9 +55,6 @@ export class DoctorMainComponent {
       }
     })
   }
-  eliminarCita(id:number | undefined){
-
-  }
   cargarMedicamentos() {
     this.medicineService.listMedicinesDoctor().subscribe({
       next: (data) => {
