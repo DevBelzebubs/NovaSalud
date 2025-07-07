@@ -2,8 +2,6 @@
   <div class="step">
     <h2>Resumen de tu cita</h2>
     <div *ngIf="appointmentToRegister">
-      <p><strong>Doctor ID:</strong> {{ appointmentToRegister.doctorId }}</p>
-      <p><strong>Horario ID:</strong> {{ appointmentToRegister.horaCita }}</p>
       <h2>Costo general de consulta: S./50</h2>
     </div>
     <div *ngIf="!appointmentToRegister">
